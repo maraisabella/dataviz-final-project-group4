@@ -18,6 +18,9 @@ Final project for the McCombs Data and Visualization Bootcamp
 ### Machine Learning Model
 
 ### Database Integration
+SQLite is the database we intend to use.
+
+We intend to use Python, Pandas functions and methods, and SQLAlchemy to filter out the columns in the COVID table from the covid.sqlite database to retrive all the data for each country.
 
 ### Data Visualization
 
