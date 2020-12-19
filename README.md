@@ -24,6 +24,7 @@ We intend to use Python, Pandas functions and methods, and SQLAlchemy to filter 
 
 SQLite is selected in the initial phase of the project as it is easy to setup. It is a file-based relational database that uses SQL as its query language. Being file-based tremendously simplifies deployment, making it very good for the case where an application needs a little database but must be run in an environment where having a database server would be problematic.
 
+We created a SQLite dabase "covid.sqlite" in the folder database. This database is created by importing the cleaned data from the CSV file "owid-covid-data.csv".
 
 ### Data Visualization
 
