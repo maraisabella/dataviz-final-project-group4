@@ -3,7 +3,7 @@ Final project for the McCombs Data and Visualization Bootcamp
 
 ## Project
 ### Topic: COVID-19 Data Analysis/Modeling to Predict New Cases across countries
-### Reason for topic selection: Number of data sources/data points available.
+### Reason for topic selection: Vast number of data sources/data points available.
 ### Description of the source of data: https://github.com/CSSEGISandData/COVID-19
 ### Questions hoping to be answered with the data: 
 - To analyze impact of covid on economy (some relationship between covid cases vs GDP)
