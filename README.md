@@ -17,7 +17,12 @@ Slack, Team meetings every other day.
 The purpose of this project is to implement end to end data pipeline and finally analyze and model the data using ML techniques.
 
 ### Exploratory Data Analysis
+The main python file used for dataset preperation and cleaning can be located   [HERE](https://github.com/maraisabella/dataviz-final-project-group4/blob/main/dataviz_fp_gp4_covid_analysis.py)
 
+We identified columns had significant missing data and removed them. For example, total vaccinations were missing the majority of the data. 
+We then removed cases that had missing values. In addition, we created boxplots to identify those variables with outliers using the script below. 
+
+![](analysis/boxplot_code)
 
 ### Machine Learning Model
 The provisional machine learning model we have used is Linear Regression to predict new Covid cases based on the following features:
