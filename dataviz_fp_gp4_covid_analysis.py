@@ -1,12 +1,9 @@
-
 ###############################################################################################
 ## dataviz_fp_gp4_covid_analysis.py                                                          ##
 ##                                                                                           ##
 ##                                                                                           ##
 ## Created by: Group4 Data Visualization Boot Camp Team                                      ##
 ###############################################################################################                                   
-
-
 import pandas as pd
 import os
 import matplotlib.pyplot as plt
@@ -77,7 +74,7 @@ cleaned_df.to_sql('cleaned_data', con=engine, if_exists='replace')
 
 ###############################################################################################
 ## This code implements the Machine Learning model                                           ##
-## Author: Muhammad Ovais Naeem                                                                                        ##
+## Author: Muhammad Ovais Naeem                                                              ##
 ###############################################################################################                                   
 
 from sklearn.linear_model import LinearRegression
@@ -137,5 +134,3 @@ print(f"R squared value for this model is: {r2_score}")
 # plt.scatter(X, y)
 # plt.plot(X, y_pred, c='red')
 # plt.savefig("linear_regression.png")
-
-
