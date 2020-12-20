@@ -1,0 +1,96 @@
+>>>>>>>>>> Connecting to covid.sqlite database <<<<<<<<<<
+<bound method NDFrame.head of       iso_code continent  ... human_development_index     id
+0          AFG      Asia  ...                   0.498      1
+1          AFG      Asia  ...                   0.498      2
+2          AFG      Asia  ...                   0.498      3
+3          AFG      Asia  ...                   0.498      4
+4          AFG      Asia  ...                   0.498      5
+...        ...       ...  ...                     ...    ...
+54551      ZWE    Africa  ...                   0.535  54552
+54552      ZWE    Africa  ...                   0.535  54553
+54553      ZWE    Africa  ...                   0.535  54554
+54554      ZWE    Africa  ...                   0.535  54555
+54555      ZWE    Africa  ...                   0.535  54556
+
+[54556 rows x 53 columns]>
+>>>>>>>>>> Cleaning Data <<<<<<<<<<
+iso_code                                314
+continent                               644
+location                                  0
+date                                      0
+total_cases                             559
+new_cases                               749
+new_cases_smoothed                     1705
+total_deaths                           8599
+new_deaths                             8773
+new_deaths_smoothed                    1705
+total_cases_per_million                 873
+new_cases_per_million                  1062
+new_cases_smoothed_per_million         2013
+total_deaths_per_million               8900
+new_deaths_per_million                 9073
+new_deaths_smoothed_per_million        2013
+reproduction_rate                     12053
+icu_patients                          49073
+icu_patients_per_million              49073
+hosp_patients                         48372
+hosp_patients_per_million             48372
+weekly_icu_admissions                 54043
+weekly_icu_admissions_per_million     54043
+weekly_hosp_admissions                53763
+weekly_hosp_admissions_per_million    53763
+new_tests                             29172
+total_tests                           29235
+total_tests_per_thousand              29235
+new_tests_per_thousand                29172
+new_tests_smoothed                    26206
+new_tests_smoothed_per_thousand       26206
+positive_rate                         28144
+tests_per_case                        28578
+tests_units                           25127
+total_vaccinations                    54550
+total_vaccinations_per_hundred        54550
+stringency_index                       6123
+population                              314
+population_density                     1462
+median_age                             2629
+aged_65_older                          3235
+aged_70_older                          2924
+gdp_per_capita                         2632
+extreme_poverty                       19005
+cardiovasc_death_rate                  2097
+diabetes_prevalence                    1484
+female_smokers                        13075
+male_smokers                          13642
+handwashing_facilities                28372
+hospital_beds_per_thousand             6298
+life_expectancy                         592
+human_development_index                2406
+id                                        0
+dtype: int64
+<bound method NDFrame.head of        location        date  ...  human_development_index     id
+312     Albania  2020-03-24  ...                    0.785    313
+313     Albania  2020-03-25  ...                    0.785    314
+314     Albania  2020-03-26  ...                    0.785    315
+315     Albania  2020-03-27  ...                    0.785    316
+316     Albania  2020-03-28  ...                    0.785    317
+...         ...         ...  ...                      ...    ...
+54539  Zimbabwe  2020-11-30  ...                    0.535  54540
+54540  Zimbabwe  2020-12-01  ...                    0.535  54541
+54541  Zimbabwe  2020-12-02  ...                    0.535  54542
+54542  Zimbabwe  2020-12-03  ...                    0.535  54543
+54543  Zimbabwe  2020-12-04  ...                    0.535  54544
+
+[21523 rows x 21 columns]>
+>>>>>>>>>> Connecting ML model to database <<<<<<<<<<
+Intercept: 
+ 2242.6106096516964
+Coefficients: 
+ [ 9.60657050e-03  7.77375402e+02  2.65945024e+01  2.51212984e-06
+  2.93846279e-02 -7.90876732e+00 -9.82797352e+01  2.83990548e+02
+  2.34912273e-02  1.78901582e+01  1.03556311e+00  1.13016790e+02
+  2.93775196e+00 -1.45206785e+01 -5.84212300e+01 -1.10404060e+02
+  2.73322091e+03]
+>>>>>>>>>> Generating evaluating metrics <<<<<<<<<<
+Mean Square Error for this model is: 5124.77880420126
+R squared value for this model is: 0.6944965902211448
