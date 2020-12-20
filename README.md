@@ -17,9 +17,7 @@ Slack, Team meetings every other day.
 The purpose of this project is to implement end to end data pipeline and finally analyze and model the data using ML techniques.
 
 ### Exploratory Data Analysis
-The main python file used for dataset preperation and cleaning can be located   [HERE](https://github.com/maraisabella/dataviz-final-project-group4/blob/main/dataviz_fp_gp4_covid_analysis.py)
-
-We identified columns had significant missing data and removed them. For example, total vaccinations were missing the majority of the data. 
+We identified columns that had significant missing data and removed them. For example, total vaccinations were missing the majority of the data. 
 We then removed cases that had missing values. In addition, we created boxplots to identify those variables with outliers using the script below. 
 
 ![](analysis/boxplot_code.png)
@@ -49,7 +47,7 @@ features = [
 #### Screenshot of ML code:
 ![](analysis/ml_code.png)
 
-Mean Square Error for this model is: 5124.77880420126
+Mean Square Error for this model is: 5124.77880420126 <br>
 R squared value for this model is: 0.6944965902211448
 
 ### Database Integration
@@ -61,7 +59,19 @@ SQLite is selected in the initial phase of the project as it is easy to setup. I
 
 We created a SQLite dabase "covid.sqlite" in the folder database. This database is created by importing the cleaned data from the CSV file "owid-covid-data.csv".
 
+### Scripts
+Following is the description of scripts for this project:
+- dataviz_fp_gp4_covid_analysis.py <br>
+This is the main core file implementing end to end data pipeline, database and machine learning model
+
+- dataviz_fp_gp4_covid_sql_setup_test.py <br>
+Python script for running test commands for SQLite
+
+- dataviz_fp_gp4_sqlite_setup_test.ipynb <br>
+Jupyter notebook file to test commands for SQLite
+
 ### Data Visualization
+TBD
 
 
 
