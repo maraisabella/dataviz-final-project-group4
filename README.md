@@ -3,8 +3,8 @@ Final project for the McCombs Data and Visualization Bootcamp
 
 ## Project
 ### Topic: COVID-19 Data Analysis/Modeling to Predict New Cases across countries
-### Reason for topic selection: 
-### Description of the source of data: https://github.com/owid/covid-19-data/tree/master/public/data
+### Reason for topic selection: Number of data sources/data points available.
+### Description of the source of data: https://github.com/CSSEGISandData/COVID-19
 ### Questions hoping to be answered with the data: 
 - To analyze impact of covid on economy (some relationship between covid cases vs GDP)
 - To analyze relationship between underlying health conditions and deaths
@@ -14,11 +14,38 @@ Final project for the McCombs Data and Visualization Bootcamp
 Slack, Team meetings every other day.
 
 ## Overview
+The purpose of this project is to implement end to end data pipeline and finally analyze the data 
 
 ### Exploratory Data Analysis
 
+
 ### Machine Learning Model
-The provisional machine learning model we have used is Linear Regression to predict new Covid cases.
+The provisional machine learning model we have used is Linear Regression to predict new Covid cases based on the following features:
+
+features = [
+ 'total_cases',
+ 'reproduction_rate',
+ 'stringency_index',
+ 'population',
+ 'population_density',
+ 'median_age',
+ 'aged_65_older',
+ 'aged_70_older',
+ 'gdp_per_capita',
+ 'extreme_poverty',
+ 'cardiovasc_death_rate',
+ 'diabetes_prevalence',
+ 'female_smokers',
+ 'male_smokers',
+ 'hospital_beds_per_thousand',
+ 'life_expectancy',
+ 'human_development_index']
+
+#### Screenshot of ML code:
+![](analysis/ml_code.png)
+
+Mean Square Error for this model is: 5124.77880420126
+R squared value for this model is: 0.6944965902211448
 
 ### Database Integration
 SQLite is the database we intend to use for the initial analysis.
