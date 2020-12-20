@@ -2,20 +2,23 @@
 Final project for the McCombs Data and Visualization Bootcamp
 
 ## Project
-### Selected topic: COVID-19 Data Analysis to Predict New Cases across country
-### Reason they selected the topic: 
+### Topic: COVID-19 Data Analysis/Modeling to Predict New Cases across countries
+### Reason for topic selection: 
 ### Description of the source of data: https://github.com/owid/covid-19-data/tree/master/public/data
 ### Questions hoping to be answered with the data: 
 - To analyze impact of covid on economy (some relationship between covid cases vs GDP)
 - To analyze relationship between underlying health conditions and deaths
-- Recovery rate vs country
 - Predict new cases
 
-### Description of the communication protocols: Slack, Team meetings every other day.
+### Description of the communication protocols: 
+Slack, Team meetings every other day.
 
-### Overview
+## Overview
+
+### Exploratory Data Analysis
 
 ### Machine Learning Model
+The provisional machine learning model we have used is Linear Regression to predict new Covid cases.
 
 ### Database Integration
 SQLite is the database we intend to use for the initial analysis.
@@ -27,6 +30,7 @@ SQLite is selected in the initial phase of the project as it is easy to setup. I
 We created a SQLite dabase "covid.sqlite" in the folder database. This database is created by importing the cleaned data from the CSV file "owid-covid-data.csv".
 
 ### Data Visualization
+
 
 
 
