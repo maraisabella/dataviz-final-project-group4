@@ -22,7 +22,7 @@ The main python file used for dataset preperation and cleaning can be located   
 We identified columns had significant missing data and removed them. For example, total vaccinations were missing the majority of the data. 
 We then removed cases that had missing values. In addition, we created boxplots to identify those variables with outliers using the script below. 
 
-![](analysis/boxplot_code)
+![](analysis/boxplot_code.png)
 
 ### Machine Learning Model
 The provisional machine learning model we have used is Linear Regression to predict new Covid cases based on the following features:
