@@ -14,7 +14,7 @@ Final project for the McCombs Data and Visualization Bootcamp
 Slack, Team meetings every other day.
 
 ## Overview
-The purpose of this project is to implement end to end data pipeline and finally analyze the data 
+The purpose of this project is to implement end to end data pipeline and finally analyze and model the data using ML techniques.
 
 ### Exploratory Data Analysis
 
