@@ -32,6 +32,7 @@ print (data_df.head)
 ##                                                                                           ##
 ###############################################################################################
 # Check total null values for each column
+print(">>>>>>>>>> Cleaning Data <<<<<<<<<<")
 print(data_df.isnull().sum())
 data_df.drop(['tests_per_case',
 'new_tests',
@@ -81,6 +82,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 
+print(">>>>>>>>>> Connecting ML model to database <<<<<<<<<<")
 # Connect to cleaned_data database
 data_to_model_df = pd.read_sql("SELECT * FROM cleaned_data", conn)
 
@@ -129,8 +131,9 @@ y_pred = model.predict(X_test)
 mean_sq_error = (np.sqrt(mean_squared_error(y_test, y_pred)))
 r2 = r2_score(y_test, y_pred)
 
+print(">>>>>>>>>> Generating evaluating metrics <<<<<<<<<<")
 print(f"Mean Square Error for this model is: {mean_sq_error}")
-print(f"R squared value for this model is: {r2_score}")
+print(f"R squared value for this model is: {r2}")
 # plt.scatter(X, y)
 # plt.plot(X, y_pred, c='red')
 # plt.savefig("linear_regression.png")
