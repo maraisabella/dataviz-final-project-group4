@@ -62,6 +62,21 @@ features = ['race',
 
 ### Database Integration
 
+**pgAdmin/PostgreSQL** is the database we used for segment 2 analysis.
+
+We are connecting to the postgresSQL database and accessing the data in the python file using the "psycopg2" and "sqlalchemy".
+
+**'diabetes_raw_data'** table is created in the postgresSQL database to hold all the raw data. The raw data is imported from the csv file - diabetic_data_initial.csv.
+The raw data from the postgresSQL table 'diabetes_raw_data' is read into dataframe - diabetes_raw_data_df.
+
+After the data cleaning procedure is completed, the cleaned data in the dataframe diabetes_raw_data_df is written to a new table **'diabetes_clean_data'**. The new table 'diabetes_clean_data' is created while copying the data from dataframe into sql.
+
+Multiple other tables are created from 'diabetes_clean_data' table in the database.sql file.
+The tables are : Patient, Admission, Diagnosis and Medicines.
+
+**ERD** and the **schema** can be found in *database/DiabetesERD.png* and *database/diabetes_schema.txt*.
+
+Inner join is performed from Patient into the Admission table to view the pateints who are re-amitted.
 
 ### Scripts
 
