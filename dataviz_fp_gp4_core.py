@@ -29,7 +29,7 @@ from config import db_password
 
 # Database Credentials
 DB_HOST = "127.0.0.1"
-DB_PORT = "5433"
+DB_PORT = "5432"
 DB_NAME = "DiabeticDB"
 DB_USER = "postgres"
 DB_PASS = db_password
@@ -111,7 +111,7 @@ print("Table 'diabetes_raw_data' successfully created")
 # Copy the contents from the diabetic_data_initial.csv and write it to 'diabetes_raw_data' table
 cur = conn.cursor()
 cur.execute('''COPY diabetes_raw_data
-    FROM '/Users/monaeem/Final_Project/dataviz-final-project-group4/database/diabetic_data_initial.csv'
+    FROM '/Users/anusuyapoonja/Bootcamp_Analysis/Modules/Project/Dataset/diabetic_data_initial.csv'
     CSV HEADER DELIMITER ',';''')
 
 ###############################################################################################
@@ -263,6 +263,11 @@ df_cleaned.to_sql(name='diabetes_clean_data', con=engine, if_exists='replace', i
     'medical_specialty_recoded' : sqlalchemy.types.VARCHAR(length=40)})
 print("Table 'diabetes_clean_data' successfully created")
 
+# Setting the encounter_id as 'PRIMARY KEY'
+with engine.connect() as con:
+    con.execute('ALTER TABLE diabetes_clean_data ADD PRIMARY KEY (encounter_id);')
+    conn.commit()
+    
 ###############################################################################################
 ## This code implements the Exploratory Data Analysis                                        ##
 ##                                                                                           ##

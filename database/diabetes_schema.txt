@@ -1,0 +1,173 @@
+diabetes_raw_data
+-
+encounter_id int pk
+patient_nbr varchar
+race varchar
+gender varchar
+age int
+weight int
+admission_type_id int
+dischange_disposition_id int
+admission_source_id int
+time_in_hospital int
+payer_code int
+medical_speciality varchar
+num_lab_procedures int
+num_procedures int
+num_medications int
+number_outpatient int
+number_emergency int
+number_inpatient int
+diag_1 varchar
+diag_2 varchar
+diag_3 varchar
+number_diagnoses int
+max_glu_serum varchar
+A1Cresult varchar
+change varchar
+diabetesMed varchar
+readmitted varchar
+metformin varchar
+repaglinide varchar
+nateglinide varchar
+chlorpropamide varchar
+glimepiride varchar
+acetohexamide varchar
+glipizide varchar
+glyburide varchar
+tolbutamide varchar
+pioglitazone varchar
+rosiglitazone varchar
+acarbose varchar
+miglitol varchar
+troglitazone varchar
+tolazamide varchar
+examide varchar
+citoglipton varchar
+insulin varchar
+glyburide-metformin varchar
+glipizide-metformin varchar
+glimepiride-pioglitazone varchar
+metformin-rosiglitazone varchar
+metformin-pioglitazone varchar
+
+
+diabetes_clean_data
+-
+encounter_id int pk
+patient_nbr varchar
+race varchar
+gender varchar
+age int
+admission_type_id int
+dischange_disposition_id int
+admission_source_id int
+time_in_hospital int
+num_lab_procedures int
+num_procedures int
+num_medications int
+number_outpatient int
+number_emergency int
+number_inpatient int
+diag_1 varchar
+diag_2 varchar
+diag_3 varchar
+number_diagnoses int
+max_glu_serum varchar
+A1Cresult varchar
+metformin varchar
+repaglinide varchar
+nateglinide varchar
+chlorpropamide varchar
+glimepiride varchar
+acetohexamide varchar
+glipizide varchar
+glyburide varchar
+tolbutamide varchar
+pioglitazone varchar
+rosiglitazone varchar
+acarbose varchar
+miglitol varchar
+troglitazone varchar
+tolazamide varchar
+examide varchar
+citoglipton varchar
+insulin varchar
+glyburide-metformin varchar
+glipizide-metformin varchar
+glimepiride-pioglitazone varchar
+metformin-rosiglitazone varchar
+metformin-pioglitazone varchar
+change varchar
+diabetesMed varchar
+Readmitted_recoded varchar
+medical_speciality_recoded varchar
+
+
+Patient
+-
+patient_nbr varchar pk fk -< diabetes_clean_data.patient_nbr
+race varchar
+gender varchar
+age int
+
+
+Admission
+-
+Encounter_id int pk fk -< diabetes_clean_data.encounter_id
+patient_nbr int fk -< diabetes_clean_data.patient_nbr
+admission_type_id int
+dischange_disposition_id int
+admission_source_id int
+time_in_hospital int
+medical_speciality_recoded varchar
+
+
+Diagnosis
+-
+Encounter_id int pk fk -< diabetes_clean_data.encounter_id
+num_lab_procedures int
+num_procedures int
+num_medications int
+number_outpatient int
+number_emergency int
+number_inpatient int
+diag_1 varchar
+diag_2 varchar
+diag_3 varchar
+number_diagnoses int
+max_glu_serum varchar
+A1Cresult varchar
+change varchar
+diabetesMed varchar
+Readmitted_recoded varchar
+
+
+
+Medicines
+-
+Encounter_id int pk fk -< diabetes_clean_data.encounter_id
+metformin varchar
+repaglinide varchar
+nateglinide varchar
+chlorpropamide varchar
+glimepiride varchar
+acetohexamide varchar
+glipizide varchar
+glyburide varchar
+tolbutamide varchar
+pioglitazone varchar
+rosiglitazone varchar
+acarbose varchar
+miglitol varchar
+troglitazone varchar
+tolazamide varchar
+examide varchar
+citoglipton varchar
+insulin varchar
+glyburide-metformin varchar
+glipizide-metformin varchar
+glimepiride-pioglitazone varchar
+metformin-rosiglitazone varchar
+metformin-pioglitazone varchar
+
