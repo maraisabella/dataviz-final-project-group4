@@ -82,7 +82,7 @@ features = ['race',
 
 - **schema** can be found in *database/diabetes_schema.txt*.
 
-- Inner join is performed from Patient into the Admission table to view the pateints who are re-amitted.
+- Inner join is performed from Patient into the Admission table to view the pateints who are re-admitted.
 
 ### Scripts
 Following are the details of scripts and supporting files for this project:
