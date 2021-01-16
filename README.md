@@ -80,7 +80,7 @@ features = ['race',
 
     ![](database/DiabetesERD.png) 
 
-- **schema** can be found in *database/diabetes_schema.txt*.
+- **Schema** can be found in *database/diabetes_schema.txt*.
 
 - Inner join is performed from Patient into the Admission table to view the pateints who are re-admitted.
 
