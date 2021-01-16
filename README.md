@@ -95,7 +95,7 @@ Following are the details of scripts and supporting files for this project:
 - Tableau will be used as primary tool for data visualization and dashboard creation
 - Various plots/stats were generated to analyze the impact on hospital re-admission 
 - Plots and visualizations are mainly static in Tableau, however filters will be provided to visualize the plots/stats based on parameters of interest.
-- Following is a blueprint of storyboard that will be added further in next deliverables:
+- Following is a blueprint of the storyboard that will be improved and have more content added to in the next project deliverables:
 
 ![](analysis/dashboard.png)
 
