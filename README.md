@@ -30,9 +30,9 @@ Preliminary data pre-processing involves the following steps:
 - Data scaling
 
 ### Preliminary Feature Engineering
-- For preliminary feature engineering we used the coeff_ property of LogisticRegression model that shows the coefficients found for each input variable:
+- For preliminary feature engineering we calculated feature importance in RandomForestClassifier that ranks the features by their importance:
 
-![](analysis/feature_imp.png) 
+![](analysis/feature_importance.png) 
 
 ### Description of Data Splitting
 - For data splitting we used the 'shape' method to identify the percentage of 'train' set and 'test' set. Following is the code snippet:
@@ -78,8 +78,20 @@ features = ['race',
  'change',
  'diabetesMed']
 
-### Screenshot of ML code:
+### Explanation of Model Choice:
+Our label or outcome is a prediction of whether a patient will be readmitted within 30 days or not so it is naturally a classification problem. 
 
+#### Benefits
+- Logistic Regression is our initial choice as it is a binary classifier that fits our data and easy to implement.
+
+#### Limitations
+While accuracy score seems to be impressive i.e. we are achieving 91% of accureacy score with this model:
+![](analysis/accuracy_score.png)
+
+But when we look at the classification report, we can see that it fails to predict "No" readmissions:
+![](analysis/classification_report.png)
+
+Both "recall" and "f1 score" for predicting "No" readmissions is 0 which means the model is very poor and cannot be a good fit for this dataset. We clearly will have explore our data more and test other ML algorithms.
 
 ## Database Integration
 
