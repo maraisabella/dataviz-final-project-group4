@@ -22,18 +22,18 @@ The purpose of this project is to implement end to end data pipeline and finally
 ## Machine Learning Model
 Since this is a classification problem, we started with Logistic Regression model to predict the binary outcome of whether the patient will be re-admitted or not.
 
-## Data Pre-Processing
+### Data Pre-Processing
 Preliminary data pre-processing involves two steps:
 - Label encoding
 - Dropping original columns
 - Data scaling
 
-## Preliminary Feature Engineering
+### Preliminary Feature Engineering
 - For preliminary feature engineering we used the coeff_ property of LogisticRegression model that shows the coefficients found for each input variable:
 
 ![](analysis/feature_imp.png) 
 
-## Description of Data Splitting
+### Description of Data Splitting
 - For data splitting we used the 'shape' method to identify the percentage of 'train' set and 'test' set. Following is the code snippet:
 
 ![](analysis/Test_Train_Set_Percentage.png)
@@ -77,10 +77,10 @@ features = ['race',
  'change',
  'diabetesMed']
 
-#### Screenshot of ML code:
+### Screenshot of ML code:
 
 
-### Database Integration
+## Database Integration
 
 - **pgAdmin/PostgreSQL** is the database we used for segment 2 analysis.
 
@@ -110,7 +110,7 @@ Following are the details of scripts and supporting files for this project:
 - dataviz_fp_gp4_core.py - Core Python file to perform end to end process of data cleaning, connecting to database and ML algorithm.
 
 
-### Data Visualization
+## Data Visualization
 - The dashboard will be demonstrated using Google slides. The following link directs to the presentation. https://docs.google.com/presentation/d/1_bkTXbazjyO1s4JLAkCp77HT9BQO3BVKlw5PU5_HBhI/edit?usp=sharing
 - Tableau will be used as primary tool for data visualization and dashboard creation
 - Various plots/stats were generated to analyze the impact on hospital re-admission 
