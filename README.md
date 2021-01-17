@@ -117,6 +117,8 @@ Both "recall" and "f1 score" for predicting "No" readmissions is 0 which means t
 
 - Inner join is performed from Patient into the Admission table to view the pateints who are re-admitted.
 
+    ![](database/InnerJoin.png)
+
 ## Scripts
 Following are the details of scripts and supporting files for this project:
 - diabetes_dataset_cleaning_merged.ipynb - Final Jupyter Notebook file used for data cleaning and exploratory data analysis.
