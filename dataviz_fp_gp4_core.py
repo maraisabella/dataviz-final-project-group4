@@ -26,14 +26,15 @@ import sqlalchemy
 from sqlalchemy import create_engine
 import psycopg2
 from config import db_password
+from db_params import database_port, csv_path
 
 # Database Credentials
 DB_HOST = "127.0.0.1"
-DB_PORT = "5432"
+DB_PORT = database_port
 DB_NAME = "DiabeticDB"
 DB_USER = "postgres"
 DB_PASS = db_password
-CSV_FILE_PATH = "../database/diabetic_data_initial.csv"
+CSV_FILE_PATH = csv_path
 
 print(">>>>>>>>>> Connecting to DiabeticDB database <<<<<<<<<<")
 conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=db_password, host=DB_HOST, port=DB_PORT)
@@ -110,9 +111,11 @@ print("Table 'diabetes_raw_data' successfully created")
 
 # Copy the contents from the diabetic_data_initial.csv and write it to 'diabetes_raw_data' table
 cur = conn.cursor()
-cur.execute('''COPY diabetes_raw_data
-    FROM '/Users/anusuyapoonja/Bootcamp_Analysis/Modules/Project/Dataset/diabetic_data_initial.csv'
-    CSV HEADER DELIMITER ',';''')
+cmd = f'''COPY diabetes_raw_data FROM '{CSV_FILE_PATH}' CSV HEADER DELIMITER ',';'''
+# cur.execute('''COPY diabetes_raw_data
+#     FROM \'CSV_FILE_PATH\'
+#     CSV HEADER DELIMITER ',';''')
+cur.execute(cmd)
 
 ###############################################################################################
 ## This code implements the Data Cleaning Logic                                              ##
@@ -279,7 +282,7 @@ with engine.connect() as con:
 ##                                                                                           ##
 ###############################################################################################                                   
 
-# Read the raw data from the postgres into dataframe
+# Read the clean data from the postgres into dataframe
 df_cleaned = pd.read_sql_table("diabetes_clean_data", engine)
 print(df_cleaned.head)
 
@@ -367,3 +370,82 @@ print(check_df.head)
 
 from sklearn.metrics import accuracy_score
 print(accuracy_score(y_test, y_pred))
+
+# Preprocess
+from sklearn.preprocessing import StandardScaler
+
+# Create a StandardScaler instance
+scaler = StandardScaler()
+
+# Fit the StandardScaler
+X_scaler = scaler.fit(X_train)
+
+# Scale the data
+X_train_scaled = X_scaler.transform(X_train)
+X_test_scaled = X_scaler.transform(X_test)
+
+# Define the logistic regression model
+log_classifier = LogisticRegression(solver="lbfgs",max_iter=500)
+
+# Train the model
+log_classifier.fit(X_train_scaled,y_train)
+
+# Evaluate the model
+y_pred = log_classifier.predict(X_test_scaled)
+print(f" Logistic regression model accuracy after scaling: {accuracy_score(y_test,y_pred):.3f}")
+
+# Determine the shape of our training and testing sets.
+print(X_train_scaled.shape)
+print(X_test_scaled.shape)
+print(y_train.shape)
+print(y_test.shape)
+
+# Get Feature Importance
+
+# Create a random forest classifier.
+from sklearn.ensemble import RandomForestClassifier
+model = RandomForestClassifier(n_estimators=128, random_state=78) 
+
+# Fitting the model
+model = model.fit(X_train_scaled, y_train)
+
+# Calculate feature importance in the Random Forest model.
+importances = model.feature_importances_
+
+# We can sort the features by their importance.
+feature_imp = sorted(zip(importances, X.columns), reverse=True)
+for features in feature_imp:
+    print(f"{features}")
+
+X = encoded_df.drop(columns=['readmitted_recoded_le', 'pioglitazone_le', 'rosiglitazone_le', 'glimepiride_le', 'repaglinide_le',
+                            'change_le', 'nateglinide_le', 'glyburide-metformin_le', 'diabetesmed_le', 'acarbose_le', 'chlorpropamide_le',
+                            'tolbutamide_le', 'tolazamide_le', 'miglitol_le', 'glipizide-metformin_le', 'troglitazone_le', 'metformin-rosiglitazone_le',
+                            'acetohexamide_le', 'metformin-pioglitazone_le', 'glimepiride-pioglitazone_le', 'examide_le', 'citoglipton_le'])
+
+# Split training/test datasets
+X_train, X_test, y_train, y_test = train_test_split(X,
+   y, random_state=1, stratify=y)
+
+# Fit the StandardScaler
+X_scaler = scaler.fit(X_train)
+
+# Scale the data
+X_train_scaled = X_scaler.transform(X_train)
+X_test_scaled = X_scaler.transform(X_test)
+
+# Define the logistic regression model
+log_classifier = LogisticRegression(solver="lbfgs",max_iter=500)
+
+# Train the model
+log_classifier.fit(X_train_scaled,y_train)
+
+# Evaluate the model
+y_pred = log_classifier.predict(X_test_scaled)
+print(f"\nLogistic regression model accuracy: {accuracy_score(y_test,y_pred):.3f}")
+
+from sklearn.metrics import confusion_matrix, classification_report
+matrix = confusion_matrix(y_test, y_pred)
+print(f"\nConfusion Matrix: \n{matrix}")
+
+report = classification_report(y_test, y_pred)
+print(f"\nClassification Report: \n{report}")
