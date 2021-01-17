@@ -20,10 +20,10 @@ The purpose of this project is to implement end to end data pipeline and finally
 
 
 ## Machine Learning Model
-Since this is a classification problem, we started with Logistic Regression model to predict the binary outcome of whether the patient will be re-admitted or not.
+- Since this is a classification problem, we started with Logistic Regression model to predict the binary outcome of whether the patient will be re-admitted or not.
 
 ### Data Pre-Processing
-Preliminary data pre-processing involves two steps:
+Preliminary data pre-processing involves following steps:
 - Label encoding
 - Dropping original columns
 - Data scaling
@@ -104,14 +104,15 @@ features = ['race',
 
 - Inner join is performed from Patient into the Admission table to view the pateints who are re-admitted.
 
-### Scripts
+## Scripts
 Following are the details of scripts and supporting files for this project:
 - diabetes_dataset_cleaning_merged.ipynb - Final Jupyter Notebook file used for data cleaning and exploratory data analysis.
 - dataviz_fp_gp4_core.py - Core Python file to perform end to end process of data cleaning, connecting to database and ML algorithm.
 
 
 ## Data Visualization
-- The dashboard will be demonstrated using Google slides. The following link directs to the presentation. https://docs.google.com/presentation/d/1_bkTXbazjyO1s4JLAkCp77HT9BQO3BVKlw5PU5_HBhI/edit?usp=sharing
+- The dashboard will be demonstrated using Google slides. The following link directs to the presentation:
+  https://docs.google.com/presentation/d/1_bkTXbazjyO1s4JLAkCp77HT9BQO3BVKlw5PU5_HBhI/edit?usp=sharing
 - Tableau will be used as primary tool for data visualization and dashboard creation
 - Various plots/stats were generated to analyze the impact on hospital re-admission 
 - Plots and visualizations are mainly static in Tableau, however filters will be provided to visualize the plots/stats based on parameters of interest.
