@@ -35,6 +35,7 @@ Preliminary data pre-processing involves two steps:
 
 ## Description of Data Splitting
 - For data splitting we used the 'shape' method to identify the percentage of 'train' set and 'test' set. Following is the code snippet:
+
 ![](analysis/Test_Train_Set_Percentage.png)
 
 Our cleaned dataframe contains a total of 69710 rows. Doing simple math we can see that there is a 75-25 split between train set and test set respectively.
