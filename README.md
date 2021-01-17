@@ -123,6 +123,8 @@ Both "recall" and "f1 score" for predicting "No" readmissions is 0 which means t
 Following are the details of scripts and supporting files for this project:
 - diabetes_dataset_cleaning_merged.ipynb - Final Jupyter Notebook file used for data cleaning and exploratory data analysis.
 - dataviz_fp_gp4_core.py - Core Python file to perform end to end process of data cleaning, connecting to database and ML algorithm.
+- db_params.py - This file contains the database_port and csv_path. Please edit this file before executing 'dataviz_fp_gp4_core.py'.
+- config.py - This is a local file which should contain the db_password to access the local pgadmin.
 
 
 ## Data Visualization
