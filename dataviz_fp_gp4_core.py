@@ -44,10 +44,10 @@ print("Database opened successfully")
 cur = conn.cursor()
 
 # Drop the diabetes_raw_data if exists before creating one
-cur.execute("DROP TABLE IF EXISTS medicines_info");
-cur.execute("DROP TABLE IF EXISTS admission_info");
-cur.execute("DROP TABLE IF EXISTS diagnosis_info");
-cur.execute("DROP TABLE IF EXISTS patient_info");
+cur.execute("DROP TABLE IF EXISTS medicines");
+cur.execute("DROP TABLE IF EXISTS admission");
+cur.execute("DROP TABLE IF EXISTS diagnosis");
+cur.execute("DROP TABLE IF EXISTS patient");
 cur.execute("DROP TABLE IF EXISTS diabetes_clean_data");
 cur.execute("DROP TABLE IF EXISTS diabetes_raw_data");
 conn.commit()
