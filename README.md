@@ -16,10 +16,29 @@ Availability of clinical data containing valuable information.
 ## Overview
 The purpose of this project is to implement end to end data pipeline and finally analyze and model the data using ML techniques.
 
-### Exploratory Data Analysis
+## Exploratory Data Analysis
 
 
-### Machine Learning Model
+## Machine Learning Model
+Since this is a classification problem, we started with Logistic Regression model to predict the binary outcome of whether the patient will be re-admitted or not.
+
+## Data Pre-Processing
+Preliminary data pre-processing involves two steps:
+- Label encoding
+- Dropping original columns
+- Data scaling
+
+## Preliminary Feature Engineering
+- For preliminary feature engineering we used the coeff_ property of LogisticRegression model that shows the coefficients found for each input variable:
+
+![](analysis/feature_imp.png) 
+
+## Description of Data Splitting
+- For data splitting we used the 'shape' method to identify the percentage of 'train' set and 'test' set. Following is the code snippet:
+![](analysis/Test_Train_Set_Percentage.png)
+
+Our cleaned dataframe contains a total of 69710 rows. Doing simple math we can see that there is a 75-25 split between train set and test set respectively.
+
 The provisional machine learning model we have used is Logistic Regression to predict patient re-admission based on the following features:
 
 features = ['race',
