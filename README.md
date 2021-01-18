@@ -42,7 +42,7 @@ The purpose of this project is to deterine if a model could be created that woul
 - average time in hospital slightly longer (4.78 days) for those readmitted less than 30 days vs those not readmitted (4.21 days)
 ![](analysis/eda_img/time_in_hosp.png)
 
-- 90% of cases did not have a readmission within 30 days resuting in a significantly unbalanced dataset
+- 91% of cases did not have a readmission within 30 days resuting in a significantly unbalanced dataset
 ![](analysis/eda_img/readmitted.png)
 
 ## Machine Learning Model
