@@ -12,6 +12,7 @@ import pandas as pd
 import numpy as np
 import collections
 import researchpy as rp
+import scipy as sp
 from sklearn.preprocessing import LabelEncoder
 import re
 import os
@@ -221,49 +222,49 @@ df_cleaned.to_sql(name='diabetes_clean_data', con=engine, if_exists='replace', i
                    'race' : sqlalchemy.types.VARCHAR(length=20),
                    'gender' : sqlalchemy.types.VARCHAR(length=20),
                    'age' : sqlalchemy.types.VARCHAR(length=10),
-    'admission_type_id' : sqlalchemy.types.INTEGER(),
-    'discharge_disposition_id' : sqlalchemy.types.INTEGER(),
-    'admission_source_id' : sqlalchemy.types.INTEGER(),
-    'time_in_hospital' : sqlalchemy.types.INTEGER(),
-    'num_lab_procedures' :  sqlalchemy.types.INTEGER(),
-    'num_procedures' :  sqlalchemy.types.INTEGER(),
-    'num_medications' :  sqlalchemy.types.INTEGER(),
-    'number_outpatient' :  sqlalchemy.types.INTEGER(),
-    'number_emergency' :  sqlalchemy.types.INTEGER(),
-    'number_inpatient' :  sqlalchemy.types.INTEGER(),
-    'diag_1' :  sqlalchemy.types.VARCHAR(length=10),
-    'diag_2' : sqlalchemy.types.VARCHAR(length=10),
-    'diag_3' : sqlalchemy.types.VARCHAR(length=10),
-    'number_diagnoses' :  sqlalchemy.types.INTEGER(),
-    'max_glu_serum' :  sqlalchemy.types.VARCHAR(length=10),
-    'A1Cresult' :  sqlalchemy.types.VARCHAR(length=10),
-    'metformin' :  sqlalchemy.types.VARCHAR(length=10),
-    'repaglinide' :  sqlalchemy.types.VARCHAR(length=10),
-    'nateglinide' :  sqlalchemy.types.VARCHAR(length=10),
-    'chlorpropamide' :  sqlalchemy.types.VARCHAR(length=10),
-    'glimepiride' :  sqlalchemy.types.VARCHAR(length=10),
-    'acetohexamide' :  sqlalchemy.types.VARCHAR(length=10),
-    'glipizide' :  sqlalchemy.types.VARCHAR(length=10),
-    'glyburide' :  sqlalchemy.types.VARCHAR(length=10),
-    'tolbutamide' :  sqlalchemy.types.VARCHAR(length=10),
-    'pioglitazone' :  sqlalchemy.types.VARCHAR(length=10),
-    'rosiglitazone' :  sqlalchemy.types.VARCHAR(length=10),
-    'acarbose' :  sqlalchemy.types.VARCHAR(length=10),
-    'miglitol' :  sqlalchemy.types.VARCHAR(length=10),
-    'troglitazone' :  sqlalchemy.types.VARCHAR(length=10),
-    'tolazamide' :  sqlalchemy.types.VARCHAR(length=10),
-    'examide' :  sqlalchemy.types.VARCHAR(length=10),
-    'citoglipton' :  sqlalchemy.types.VARCHAR(length=10),
-    'insulin' :  sqlalchemy.types.VARCHAR(length=10),
-    'glyburide-metformin' :  sqlalchemy.types.VARCHAR(length=10),
-    'glipizide-metformin' :  sqlalchemy.types.VARCHAR(length=10),
-    'glimepiride-pioglitazone' : sqlalchemy.types.VARCHAR(length=10),
-    'metformin-rosiglitazone' :  sqlalchemy.types.VARCHAR(length=10),
-    'metformin-pioglitazone' :  sqlalchemy.types.VARCHAR(length=10),
-    'change' : sqlalchemy.types.VARCHAR(length=10),
-    'diabetesMed' :  sqlalchemy.types.VARCHAR(length=10),
-    'readmitted_recoded' :  sqlalchemy.types.VARCHAR(length=10),
-    'medical_specialty_recoded' : sqlalchemy.types.VARCHAR(length=40)})
+                   'admission_type_id' : sqlalchemy.types.INTEGER(),
+                   'discharge_disposition_id' : sqlalchemy.types.INTEGER(),
+                   'admission_source_id' : sqlalchemy.types.INTEGER(),
+                   'time_in_hospital' : sqlalchemy.types.INTEGER(),
+                   'num_lab_procedures' :  sqlalchemy.types.INTEGER(),
+                   'num_procedures' :  sqlalchemy.types.INTEGER(),
+                   'num_medications' :  sqlalchemy.types.INTEGER(),
+                   'number_outpatient' :  sqlalchemy.types.INTEGER(),
+                   'number_emergency' :  sqlalchemy.types.INTEGER(),
+                   'number_inpatient' :  sqlalchemy.types.INTEGER(),
+                   'diag_1' :  sqlalchemy.types.VARCHAR(length=10),
+                   'diag_2' : sqlalchemy.types.VARCHAR(length=10),
+                   'diag_3' : sqlalchemy.types.VARCHAR(length=10),
+                   'number_diagnoses' :  sqlalchemy.types.INTEGER(),
+                   'max_glu_serum' :  sqlalchemy.types.VARCHAR(length=10),
+                   'A1Cresult' :  sqlalchemy.types.VARCHAR(length=10),
+                   'metformin' :  sqlalchemy.types.VARCHAR(length=10),
+                   'repaglinide' :  sqlalchemy.types.VARCHAR(length=10),
+                   'nateglinide' :  sqlalchemy.types.VARCHAR(length=10),
+                   'chlorpropamide' :  sqlalchemy.types.VARCHAR(length=10),
+                   'glimepiride' :  sqlalchemy.types.VARCHAR(length=10),
+                   'acetohexamide' :  sqlalchemy.types.VARCHAR(length=10),
+                   'glipizide' :  sqlalchemy.types.VARCHAR(length=10),
+                   'glyburide' :  sqlalchemy.types.VARCHAR(length=10),
+                   'tolbutamide' :  sqlalchemy.types.VARCHAR(length=10),
+                   'pioglitazone' :  sqlalchemy.types.VARCHAR(length=10),
+                   'rosiglitazone' :  sqlalchemy.types.VARCHAR(length=10),
+                   'acarbose' :  sqlalchemy.types.VARCHAR(length=10),
+                   'miglitol' :  sqlalchemy.types.VARCHAR(length=10),
+                   'troglitazone' :  sqlalchemy.types.VARCHAR(length=10),
+                   'tolazamide' :  sqlalchemy.types.VARCHAR(length=10),
+                   'examide' :  sqlalchemy.types.VARCHAR(length=10),
+                   'citoglipton' :  sqlalchemy.types.VARCHAR(length=10),
+                   'insulin' :  sqlalchemy.types.VARCHAR(length=10),
+                   'glyburide-metformin' :  sqlalchemy.types.VARCHAR(length=10),
+                   'glipizide-metformin' :  sqlalchemy.types.VARCHAR(length=10),
+                   'glimepiride-pioglitazone' : sqlalchemy.types.VARCHAR(length=10),
+                   'metformin-rosiglitazone' :  sqlalchemy.types.VARCHAR(length=10),
+                   'metformin-pioglitazone' :  sqlalchemy.types.VARCHAR(length=10),
+                   'change' : sqlalchemy.types.VARCHAR(length=10),
+                   'diabetesMed' :  sqlalchemy.types.VARCHAR(length=10),
+                   'readmitted_recoded' :  sqlalchemy.types.VARCHAR(length=10),
+                   'medical_specialty_recoded' : sqlalchemy.types.VARCHAR(length=40)})
 print("Table 'diabetes_clean_data' successfully created")
 
 # Setting the encounter_id as 'PRIMARY KEY'
@@ -278,7 +279,7 @@ with engine.connect() as con:
 
 
 ###############################################################################################
-## This code implements the Pre-Processing for Machine Learning model                                           ##
+## This code implements the Pre-Processing for Machine Learning model                        ##
 ##                                                                                           ##
 ###############################################################################################                                   
 
@@ -338,6 +339,113 @@ for column in df_cleaned.columns:
     missing_count = df_cleaned[column].isnull().sum()
     if missing_count>0:
         print(column,":",df_cleaned)   
+        
+ 
+###############################################################################################
+## To be incorporated later                                                                  ##
+##                                                                                           ##
+###############################################################################################                                   
+       
+
+# # check multivariate outliers 
+# # credit to https://www.machinelearningplus.com/statistics/mahalanobis-distance/
+# def mahalanobis(x=None, data=None, cov=None):
+#     """Compute the Mahalanobis Distance between each row of x and the data  
+#     x    : vector or matrix of data with, say, p columns.
+#     data : ndarray of the distribution from which Mahalanobis distance of each observation of x is to be computed.
+#     cov  : covariance matrix (p x p) of the distribution. If None, will be computed from data.
+#     """
+#     x_minus_mu = x - np.mean(data)
+#     if not cov:
+#         cov = np.cov(data.values.T)# covarience of data.values transposed 
+#     inv_covmat = sp.linalg.inv(cov)
+#     left_term = np.dot(x_minus_mu, inv_covmat)
+#     mahal = np.dot(left_term, x_minus_mu.T)
+#     return mahal.diagonal()        
+        
+# #create new column in dataframe that contains Mahalanobis distance for each row
+# df_x = df_cleaned[['time_in_hospital', 'num_lab_procedures', 'num_procedures',
+#        'num_medications', 'number_outpatient', 'number_emergency','number_diagnoses']]
+# print(df_x.head())        
+
+# # df_x = df[['carat', 'depth', 'price']].head(500)
+# df_cleaned['mahala'] = mahalanobis(x=df_x, data=df_cleaned[['time_in_hospital', 'num_lab_procedures', 'num_procedures',
+#        'num_medications', 'number_outpatient', 'number_emergency','number_diagnoses']])
+# print(df_cleaned.head())
+
+# # Check multicollinearity 
+# # credit https://www.analyticsvidhya.com/blog/2020/03/what-is-multicollinearity/
+# # Import library for VIF - varience inflation factor 
+# from statsmodels.stats.outliers_influence import variance_inflation_factor
+
+# def calc_vif(X):
+#     # Calculating VIF
+#     vif = pd.DataFrame()
+#     vif["variables"] = X.columns
+#     vif["VIF"] = [variance_inflation_factor(X.values, i) for i in range(X.shape[1])]
+#     return(vif)
+
+# # variables with high VIF might be removed one at a time in descending order
+# calc_vif(df_cleaned.iloc[:,:-1])
+
+###############################################################################################
+## Summary Statistics: EDA                                                                   ##
+##                                                                                           ##
+###############################################################################################                                   
+
+# 69,710 records in the dataset 
+display(df_cleaned.describe())
+
+# 69,710 records in the dataset 
+display(df_cleaned.describe())
+
+# 53.25% of admissions came from Trauma Center followed by ED
+display(rp.summary_cat(df_cleaned[['admission_source_id']]))
+
+# ~75% of cases were caucasian followed by 18% for African American 
+display(rp.summary_cat(df_cleaned[['race']]))
+
+# 53% cases were female, 47% male 
+display(rp.summary_cat(df_cleaned[['gender']]))
+df_cleaned.gender.value_counts().plot(kind='bar', title='gender')
+plt.show()
+
+#~81% of cases above age 50
+df_cleaned.age.value_counts().plot(kind='bar')
+display(rp.summary_cat(df_cleaned[['age']]))
+
+# Average time in hospital 4.26 days 
+display(df_cleaned.agg(
+    {
+    'num_medications':["min", "max", "mean","median", "skew"], 
+    'num_lab_procedures':["min", "max", "mean","median", "skew"],
+        'time_in_hospital':["min", "max", "mean","median", "skew"], 
+        'num_lab_procedures':["min", "max", "mean","median", "skew"], 
+                  'num_procedures':["min", "max", "mean","median", "skew"], 
+        'num_medications':["min", "max", "mean","median", "skew"], 
+                  'number_outpatient':["min", "max", "mean","median", "skew"], 
+        'number_emergency':["min", "max", "mean","median", "skew"], 
+        'number_inpatient':["min", "max", "mean","median", "skew"], 
+        'number_diagnoses':["min", "max", "mean","median", "skew"]
+    }
+))
+
+# average time in hospital slightly longer (4.78 days) for those readmitted less than 30 days vs those not readmitted (4.21 days)
+display(df_cleaned.loc[:,['time_in_hospital', 'num_lab_procedures', 
+                  'num_procedures', 'num_medications', 
+                  'number_outpatient', 'number_emergency', 'number_inpatient', 'number_diagnoses']].groupby(df_cleaned['readmitted_recoded']).mean())
+
+fig, ax = plt.subplots()
+
+sum_cols = ['time_in_hospital', 'num_lab_procedures', 
+                  'num_procedures', 'num_medications', 
+                  'number_outpatient', 'number_emergency', 'number_inpatient', 'number_diagnoses']
+ax.boxplot(df_cleaned[sum_cols].values)
+plt.xticks([1, 2, 3,4,5,6,7,8], sum_cols, rotation='vertical')
+plt.show()
+
+# df_cleaned.time_in_hospital.hist()
+# plt.show()
 
 ###############################################################################################
 ## This code implements the Machine Learning model                                           ##
@@ -352,6 +460,13 @@ from sklearn.model_selection import train_test_split
 # Split training/test datasets
 X_train, X_test, y_train, y_test = train_test_split(X,
    y, random_state=1, stratify=y)
+
+# # rebalance data 
+# from imblearn.under_sampling import RandomUnderSampler
+# from collections import Counter
+# ros = RandomUnderSampler(random_state=1)
+# X_resampled, y_resampled = ros.fit_resample(X_train, y_train)
+# Counter(y_resampled)
 
 # Define the logistic regression model
 from sklearn.linear_model import LogisticRegression
