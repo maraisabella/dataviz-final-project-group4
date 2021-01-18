@@ -28,7 +28,7 @@ The purpose of this project is to deterine if a model could be created that woul
 
 ## Exploratory Data Analysis
 - The preliminary dataset contained 69,710 records
-63.57% of patients discharged were discharged to home
+- 63.57% of patients discharged were discharged to home
     - The next highest discharge disposition category was discharged/transferred to SNF at a distant 12.8%
 ![](analysis/eda_img/discharge_disp.png)
 - 53.25% of admissions came from Trauma Center followed by emergency department
