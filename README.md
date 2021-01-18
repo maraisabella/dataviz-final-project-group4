@@ -2,28 +2,69 @@
 Final project for the McCombs Data and Visualization Bootcamp
 
 ## Project
-### Topic: Prediction of early re-admission for hospitalized patients with diabetic care.
+### Topic: Prediction of early re-admission for hospitalized patients with diabetes.
 ### Reason for topic selection:
-Availability of clinical data containing valuable information.
+- According to diabetes.org, patients with diabetes are 2 times higher risk for heart disease and 4 times higher risk for stroke and suffer from other costly complications including foot problems such as gangrene, eye problems such as Diabetic retinopathy, diabetic macular edema, cataract and glaucoma, diabetic kidney disease requiring dialysis, and teeth and gum problems.
+- Diabetes.org estimates an average medical expenditure for people with diagnosed diabetes at $13,700 per year, ($7,900 attributed to diabetes) with 327 billion total cost of diagnosed in 2017 and 237 billion in direct medical costs, 90 billion in reduced productivity.
+- National Library of Medicine and NIH report that nearly 20% of all Medicare discharges had a readmission within 30 days with readmissions associating with unfavorable patient outcomes and high financial costs 
+- Medicare payment advisory commission (MedPAC) estimated that 12% of readmissions are potentially avoidable. 
 
-### Description of the source of data: https://www.hindawi.com/journals/bmri/2014/781670/#supplementary-materials
+### Description of the source of data: 
+- This study uses the Health Facts database (Cerner Corporation, Kansas City, MO), a national data warehouse that collects comprehensive clinical records across hospitals throughout the United States. 
+- The Health Facts database is comprised of data collected from 130 hospitals and integrated delivery systems throughout the United States that use the Cerner Corporation electronic medical records representing 10 years (1999 – 2008) of clinical care.
+- The database includes encounter data, provider specialty, demographics, diagnoses and in-hospital procedures documented by ICD-9-cm codes, laboratory data, pharmacy data, in-hospital mortality, and hospital characteristics.
+- All data was de-identified in compliance with HIPPA before being provided to researchers and continuity of patient encounters was preserved.
+- Initial dataset is available at the website of Data Mining and Biomedical Informatics Lab at VCU (http://www.cioslab.vcu.edu/).
+
 ### Questions hoping to be answered with the data: 
-- To analyze the clinical data and predict early re-admission (within 30 days) of diabetic patients.
+- To analyze the clinical data and predict early re-admission (within 30 days) of diabetic patients
+
 
 ### Description of the communication protocols: 
 - In order to enhance our communication in the most effective manner, we will be communicating via Slack for project updates. We will also be conducting team Zoom meetings every day. With both of these methods being used for our project, they are both equally crucial because we will be notifying each other of changes made to code and coordinating with each other before changes are pushed, pulled, and merged on GitHub.
 
 ## Overview
-The purpose of this project is to implement end to end data pipeline and finally analyze and model the data using ML techniques.
+The purpose of this project is to deterine if a model could be created that would significantly predict early readmissions (defined as less than 30 days from discharge) using logistic regression. 
 
 ## Exploratory Data Analysis
+- The preliminary dataset contained 69,710 records
+63.57% of patients discharged were discharged to home
+    - The next highest discharge disposition category was discharged/transferred to SNF at a distant 12.8%
+![](analysis/eda_img/discharge_disp.png)
+- 53.25% of admissions came from Trauma Center followed by emergency department
+![](analysis/eda_img/admission_source.png)
+- Roughly ~75% of cases were caucasian followed by 18% for African American
+![](analysis/eda_img/race.png)
+- 53% cases were female, 47% male 
+![](analysis/eda_img/gender.png)
+- ~81% of cases above age 50
+![](analysis/eda_img/age.png)
+- average time in hospital slightly longer (4.78 days) for those readmitted less than 30 days vs those not readmitted (4.21 days)
+![](analysis/eda_img/time_in_hosp.png)
 
+- 90% of cases did not have a readmission within 30 days resuting in a significantly unbalanced dataset
+![](analysis/eda_img/readmitted.png)
 
 ## Machine Learning Model
 Since this is a classification problem, we started with Logistic Regression model to predict the binary outcome of whether the patient will be re-admitted or not.
 
 ### Data Pre-Processing
-Preliminary data pre-processing involves the following steps:
+
+The Initial dataset was created in two steps (prior to download):
+1. Encounters of interest were extracted from database with 55 attributes
+2. Preliminary analysis and preprocessing of data were performed resulting in retaining attributes and encounters that could be used for further analysis using the following inclusion criteria
+    - Inpatient encounters (hospital admission)
+    - Diabetic encounter in which any kind of diabetes was entered into the system as a diagnosis
+    - Length of stay was at least 1 day and no more than 14 days
+    - Lab tests were performed during the encounter
+    - Medications were administered during the encounter
+- Original dataset contained incomplete and redundant information. Several features with high missing values include:
+    - Weight – excluded from dataset
+    - Payer code – excluded from dataset
+    - Medical specialty – included in dataset
+
+
+Pre-processing involves the following steps:
 - Reading cleaned data from database 
 - Label encoding
 - Dropping original columns
