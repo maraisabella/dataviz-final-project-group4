@@ -68,7 +68,7 @@ Pre-processing involves the following steps:
 - Reading cleaned data from database 
 - Label encoding
 - Dropping original columns
-- Data scaling
+- Data scaling 
 
 ### Preliminary Feature Engineering
 - For preliminary feature engineering we calculated feature importance in RandomForestClassifier that ranks the features by their importance:
