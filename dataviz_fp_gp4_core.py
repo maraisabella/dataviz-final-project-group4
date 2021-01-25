@@ -32,7 +32,7 @@ from db_params import database_port, csv_path
 
 # Database Credentials
 DB_HOST = "127.0.0.1"
-DB_PORT = "5433"
+DB_PORT = database_port
 DB_NAME = "DiabeticDB"
 DB_USER = "postgres"
 DB_PASS = db_password
