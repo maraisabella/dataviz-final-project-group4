@@ -18,6 +18,7 @@ Final project for the McCombs Data and Visualization Bootcamp
 
 ### Questions hoping to be answered with the data: 
 - To analyze the clinical data and predict early readmission (within 30 days) of diabetic patients
+- Is there a signfiicant difference between patietns hospitalized with diabetes that have been readmitted within 30 days vs those not readmitted within 30 days, and if so, on what dimensions do they differ. 
 
 
 ### Description of the communication protocols: 
@@ -46,7 +47,8 @@ The purpose of this project is to deterine if a model could be created that woul
 ![](analysis/eda_img/readmitted.png)
 
 ## Machine Learning Model
-Since this is a classification problem, we started with Logistic Regression model to predict the binary outcome of whether the patient will be re-admitted or not.
+Since this is a classification problem, we started with Logistic Regression model to predict the binary outcome of whether the patient will be re-admitted within 30 days or not.
+We applied a tree model and a random forrest model as well after several adjustments to the logistic regression model. 
 
 ### Data Pre-Processing
 
@@ -68,6 +70,7 @@ Pre-processing involves the following steps:
 - Reading cleaned data from database 
 - Label encoding
 - Dropping original columns
+- Data resampling
 - Data scaling 
 
 ### Preliminary Feature Engineering
@@ -76,7 +79,7 @@ Pre-processing involves the following steps:
 ![](analysis/feature_importance.png) 
 
 ### Description of Data Splitting
-- For data splitting we used the 'shape' method to identify the percentage of 'train' set and 'test' set. Following is the code snippet:
+- Data were split using the sklearn model selection module to split the dataset into training and testing datasets. the training dataset comprised of 70% of the original dataset while the testing set contained 30% of the dataset. For data splitting we used the following code snippet:
 
 ![](analysis/Test_Train_Set_Percentage.png)
 
