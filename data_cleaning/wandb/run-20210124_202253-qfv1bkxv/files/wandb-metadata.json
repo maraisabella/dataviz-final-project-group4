@@ -1,0 +1,24 @@
+{
+    "os": "Darwin-19.6.0-x86_64-i386-64bit",
+    "python": "3.7.7",
+    "heartbeatAt": "2021-01-25T02:23:08.075674",
+    "startedAt": "2021-01-25T02:22:53.961553",
+    "docker": null,
+    "cpu_count": 8,
+    "cuda": null,
+    "args": [
+        "-f",
+        "/Users/monaeem/Library/Jupyter/runtime/kernel-ee2cce6a-70dc-46fb-a179-2c9cc6c7bfda.json"
+    ],
+    "state": "running",
+    "program": "<python with no main file>",
+    "git": {
+        "remote": "https://github.com/maraisabella/dataviz-final-project-group4.git",
+        "commit": "3c86690efb409e9ee480c34b8a3c7bda8579f2c2"
+    },
+    "email": "munaeem77@gmail.com",
+    "root": "/Users/monaeem/Final_Project/dataviz-final-project-group4_",
+    "host": "Muhammads-MacBook-Pro.local",
+    "username": "monaeem",
+    "executable": "/Users/monaeem/opt/anaconda3/envs/mlenv/bin/python"
+}
