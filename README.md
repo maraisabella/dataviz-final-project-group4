@@ -158,7 +158,7 @@ Due to the imbalance in data we first tried RandomUnderSampling but it didn't im
 ![](analysis/brfc_plot.png)
 
 #### Model Selected
-We can see from the above scores that Random Forest Classifier reasonably fits the model as f1 score, recall and precision have significantly improved to predict <30 day re-admmission cases.
+We can see from the above scores that Random Forest Classifier reasonably fits the model as f1 score, recall and precision have significantly improved to predict <30 day re-admmission cases. 
 
 ## Database Integration
 
