@@ -172,7 +172,7 @@ Following are the details of scripts and supporting files for this project:
 - The dashboard will be demonstrated using Google slides. 
 - The different elements of our project will be highlighted in the slides.
 - The following link directs to the presentation:
-https://docs.google.com/presentation/d/1t7hnqTvwdebYlNXzeW0B_2L0q2JRRkGE5SaYeAwlZSw/edit?usp=sharing
+    https://docs.google.com/presentation/d/1t7hnqTvwdebYlNXzeW0B_2L0q2JRRkGE5SaYeAwlZSw/edit?usp=sharing
 
 - Tableau will be used as primary tool for data visualization and dashboard creation
 
