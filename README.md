@@ -2,7 +2,7 @@
 Final project for the McCombs Data and Visualization Bootcamp
 
 ## Project
-### Topic: Prediction of early re-admission for hospitalized patients with diabetes.
+### Topic: Prediction of early readmission for hospitalized patients with diabetes.
 ### Reason for topic selection:
 - According to diabetes.org, patients with diabetes are 2 times higher risk for heart disease and 4 times higher risk for stroke and suffer from other costly complications including foot problems such as gangrene, eye problems such as Diabetic retinopathy, diabetic macular edema, cataract and glaucoma, diabetic kidney disease requiring dialysis, and teeth and gum problems.
 - Diabetes.org estimates an average medical expenditure for people with diagnosed diabetes at $13,700 per year, ($7,900 attributed to diabetes) with 327 billion total cost of diagnosed in 2017 and 237 billion in direct medical costs, 90 billion in reduced productivity.
@@ -17,7 +17,7 @@ Final project for the McCombs Data and Visualization Bootcamp
 - Initial dataset is available at the website of Data Mining and Biomedical Informatics Lab at VCU (http://www.cioslab.vcu.edu/).
 
 ### Questions hoping to be answered with the data: 
-- To analyze the clinical data and predict early re-admission (within 30 days) of diabetic patients
+- To analyze the clinical data and predict early readmission (within 30 days) of diabetic patients
 
 
 ### Description of the communication protocols: 
@@ -82,7 +82,7 @@ Pre-processing involves the following steps:
 
 Our cleaned dataframe contains a total of 69710 rows. Doing simple math we can see that there is a 75-25 split between train set and test set respectively.
 
-The provisional machine learning model we have used is Logistic Regression to predict patient re-admission based on the following features:
+The provisional machine learning model we have used is Logistic Regression to predict patient readmission based on the following features:
 
 features = ['race',
  'gender',
@@ -182,7 +182,7 @@ We can see from the above scores that Random Forest Classifier reasonably fits t
 
 - **Schema** can be found in *database/diabetes_schema.txt*.
 
-- Inner join is performed from Patient into the Admission table to view the pateints who are re-admitted.
+- Inner join is performed from Patient into the Admission table to view the pateints who are readmitted.
 
     ![](database/InnerJoin.png)
 
