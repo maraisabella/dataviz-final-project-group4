@@ -195,17 +195,12 @@ Following are the details of scripts and supporting files for this project:
 
 
 ## Data Visualization
-- The dashboard will be demonstrated using Google slides. 
-- The different elements of our project will be highlighted in the slides.
-- The following link directs to the presentation:
-    https://docs.google.com/presentation/d/1t7hnqTvwdebYlNXzeW0B_2L0q2JRRkGE5SaYeAwlZSw/edit?usp=sharing
-
-- Tableau will be used as primary tool for data visualization and dashboard creation
-
-- Various plots/stats were generated to analyze the impact on hospital readmission 
-
-- Plots and visualizations are mainly static in Tableau, however filters will be provided to visualize the plots/stats based on parameters of interest. 
-
+- The dashboard will be demonstrated using Google slides. The following link directs to the presentation:
+ https://docs.google.com/presentation/d/1_bkTXbazjyO1s4JLAkCp77HT9BQO3BVKlw5PU5_HBhI/edit?usp=sharing
+- Tableau is used as primary tool for data visualization and dashboard creation. The story board for our project can be found at the following link:
+https://public.tableau.com/profile/muhammad.ovais.naeem#!/vizhome/Final_Project_Dashboard_16103489836810/Story1?publish=yes (In Progress)
+- Various plots/stats were generated to analyze the impact on hospital re-admission 
+- Plots and visualizations are mainly static in Tableau, however filters will be provided to visualize the plots/stats based on parameters of interest.
 - Following is a blueprint of the storyboard that will be improved and have more content added to in the next project deliverables:
 
 ![](analysis/dashboard.png)
