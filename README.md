@@ -134,6 +134,32 @@ But when we look at the classification report, we can see that it fails to predi
 
 Both "recall" and "f1 score" for predicting "No" readmissions is 0 which means the model is very poor and cannot be a good fit for this dataset. We clearly will have explore our data more and test other ML algorithms.
 
+#### Undersampled Data
+Counter output on target variable clearly reveals that our data is undersampled:
+![](analysis/undersampled.png)
+
+#### Explanation of Improvement in Sampling and Model
+Due to the imbalance in data we first tried RandomUnderSampling but it didn't improve the precision and recall significantly. Then we tried SMOTE and Edited Nearest Neighbors (ENN) or SMOTEENN. We tried different classifiers 'Logistic Regression','Random Forest Classifier','Decision Tree' and 'Balanced Random Fores Classifier' as shown below along with their respective confusion matrices, accuracy scores and classification reports:
+
+![](analysis/lreg_report.png)
+
+![](analysis/lreg_plot.png)
+
+![](analysis/rfc_report.png)
+
+![](analysis/rfc_plot.png)
+
+![](analysis/tree_report.png)
+
+![](analysis/tree_plot.png)
+
+![](analysis/brfc_report.png)
+
+![](analysis/brfc_plot.png)
+
+#### Model Selected
+We can see from the above scores that Random Forest Classifier reasonably fits the model as f1 score, recall and precision have significantly improved to predict <30 day re-admmission cases.
+
 ## Database Integration
 
 - **pgAdmin/PostgreSQL** is the database we used for segment 2 analysis.
