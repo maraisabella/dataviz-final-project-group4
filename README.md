@@ -170,7 +170,8 @@ Following are the details of scripts and supporting files for this project:
 
 ## Data Visualization
 - The dashboard will be demonstrated using Google slides. The following link directs to the presentation:
- https://docs.google.com/presentation/d/1_bkTXbazjyO1s4JLAkCp77HT9BQO3BVKlw5PU5_HBhI/edit?usp=sharing
+https://docs.google.com/presentation/d/1t7hnqTvwdebYlNXzeW0B_2L0q2JRRkGE5SaYeAwlZSw/edit?usp=sharing
+
 - Tableau will be used as primary tool for data visualization and dashboard creation
 - Various plots/stats were generated to analyze the impact on hospital re-admission 
 - Plots and visualizations are mainly static in Tableau, however filters will be provided to visualize the plots/stats based on parameters of interest.
