@@ -1,5 +1,5 @@
-# dataviz-final-project-group4
-Final project for the McCombs Data and Visualization Bootcamp
+# Data Visualization Final Project - Team 4
+#Final project for the McCombs Data and Visualization Bootcamp
 
 ## Project
 ### Topic: Prediction of early readmission for hospitalized patients with diabetes using data collected from electronic medical records.
@@ -198,7 +198,7 @@ Following are the details of scripts and supporting files for this project:
 
 ## Data Visualization
 - The dashboard will be demonstrated using Google slides. The following link directs to the presentation:
-- https://docs.google.com/presentation/d/1t7hnqTvwdebYlNXzeW0B_2L0q2JRRkGE5SaYeAwlZSw/edit?usp=sharing
+https://docs.google.com/presentation/d/1t7hnqTvwdebYlNXzeW0B_2L0q2JRRkGE5SaYeAwlZSw/edit?usp=sharing
 
 - Tableau is used as primary tool for data visualization and dashboard creation. The story board for our project can be found at the following link:
 https://public.tableau.com/profile/muhammad.ovais.naeem#!/vizhome/Final_Project_Dashboard_16103489836810/Story1?publish=yes (In Progress)
