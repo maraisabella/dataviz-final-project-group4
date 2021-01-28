@@ -1,5 +1,5 @@
 # Data Visualization Final Project - Team 4
-#Final project for the McCombs Data and Visualization Bootcamp
+- Final project for the McCombs Data and Visualization Bootcamp
 
 ## Project
 ### Topic: Prediction of early readmission for hospitalized patients with diabetes using data collected from electronic medical records.
