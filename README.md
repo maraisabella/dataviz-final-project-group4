@@ -2,7 +2,7 @@
 Final project for the McCombs Data and Visualization Bootcamp
 
 ## Project
-### Topic: Prediction of early readmission for hospitalized patients with diabetes.
+### Topic: Prediction of early readmission for hospitalized patients with diabetes using data collected from electronic medical records.
 ### Reason for topic selection:
 - According to diabetes.org, patients with diabetes are 2 times higher risk for heart disease and 4 times higher risk for stroke and suffer from other costly complications including foot problems such as gangrene, eye problems such as Diabetic retinopathy, diabetic macular edema, cataract and glaucoma, diabetic kidney disease requiring dialysis, and teeth and gum problems.
 - Diabetes.org estimates an average medical expenditure for people with diagnosed diabetes at $13,700 per year, ($7,900 attributed to diabetes) with 327 billion total cost of diagnosed in 2017 and 237 billion in direct medical costs, 90 billion in reduced productivity.
@@ -67,19 +67,18 @@ The Initial dataset was created in two steps (prior to download):
 
 
 Pre-processing involves the following steps:
-- Reading cleaned data from database 
-- Label encoding
-- Dropping original columns
-- Data resampling
-- Data scaling 
+
 
 ### Preliminary Feature Engineering
-- For preliminary feature engineering we calculated feature importance in RandomForestClassifier that ranks the features by their importance:
+- several variables modified using one hot encoding and dummy coding
+- Data was resampled to address imbalance in early readmissions
+- Data was scaled to improve model performance 
+- Feature importance was run with  RandomForestClassifier that ranks the features by their importance:
 
 ![](analysis/feature_importance.png) 
 
 ### Description of Data Splitting
-- Data were split using the sklearn model selection module to split the dataset into training and testing datasets. the training dataset comprised of 70% of the original dataset while the testing set contained 30% of the dataset. For data splitting we used the following code snippet:
+- Data were split using the sklearn model selection module to split the dataset into training and testing datasets. The training dataset comprised of 70% of the original dataset while the testing set contained 30% of the dataset. For data splitting we used the following code snippet:
 
 ![](analysis/Test_Train_Set_Percentage.png)
 
