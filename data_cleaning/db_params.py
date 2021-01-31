@@ -1,0 +1,6 @@
+DBHOST = 'diabetesdb.c7oh8hhiktgn.us-east-2.rds.amazonaws.com'
+DBNAME = 'postgres'
+DBUSER = 'postgres'
+DBPASSWORD = 'postgres123'
+DBPORT = '5432'
+CSV_FILE_PATH = '/Users/anusuyapoonja/Bootcamp_Analysis/diabetic_data_initial.csv'
