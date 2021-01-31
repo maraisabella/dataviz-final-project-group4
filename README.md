@@ -143,21 +143,21 @@ Counter output on target variable clearly reveals that our data is undersampled:
 #### Explanation of Improvement in Sampling and Model
 Due to the imbalance in data we first tried RandomUnderSampling but it didn't improve the precision and recall significantly. Then we tried SMOTE and Edited Nearest Neighbors (ENN) or SMOTEENN. We tried different classifiers 'Logistic Regression','Random Forest Classifier','Decision Tree' and 'Balanced Random Fores Classifier' as shown below along with their respective confusion matrices, accuracy scores and classification reports:
 
-![](analysis/lreg_report.png)
+![](analysis/ml_img/lreg_report.png)
 
-![](analysis/lreg_plot.png)
+![](analysis/ml_img/LREG.png)
 
-![](analysis/rfc_report.png)
+![](analysis/ml_img/rfc_report.png)
 
-![](analysis/rfc_plot.png)
+![](analysis/ml_img/rfc_plot.png)
 
-![](analysis/tree_report.png)
+![](analysis/ml_img/tree_report.png)
 
-![](analysis/tree_plot.png)
+![](analysis/ml_img/tree_plot.png)
 
-![](analysis/brfc_report.png)
+![](analysis/ml_img/brfc_report.png)
 
-![](analysis/brfc_plot.png)
+![](analysis/ml_img/brfc_plot.png)
 
 #### Model Selected
 We can see from the above scores that Random Forest Classifier reasonably fits the model as f1 score, recall and precision have significantly improved to predict <30 day re-admmission cases. 
