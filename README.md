@@ -165,9 +165,13 @@ We can see from the above scores that Random Forest Classifier reasonably fits t
 
 ## Database Integration
 
-- **pgAdmin/PostgreSQL** is the database we used for segment 2 analysis.
+- **SQLite** is the initial database that was used. It is local and easy to setup.
 
-- We are connecting to the postgresSQL database and accessing the data in the python file using the "psycopg2" and "sqlalchemy".
+- SQLAlchemy was used to connect to and query a SQLite database. DB Browser was used to import the csv file into SQLite table.
+
+- **pgAdmin/PostgreSQL** is the database we used for segment 2 and 3 analysis.
+
+- We were connecting to the postgresSQL database and accessing the data in the python file using the "psycopg2" and "sqlalchemy".
 
 - **'diabetes_raw_data'** table is created in the postgresSQL database to hold all the raw data. The raw data is imported from the csv file - diabetic_data_initial.csv.
 
@@ -188,13 +192,18 @@ We can see from the above scores that Random Forest Classifier reasonably fits t
 - Inner join is performed from Patient into the Admission table to view the pateints who are readmitted.
 
     ![](database/InnerJoin.png)
+    
+- **AWS Rational Database Service with PostgreSQL engine** is the final database that is used.
+
+- AWS RDS is easier to setup, operate and is highly scalable.
+
+- pgAdmin was used to connect PostgreSQL to DRS instance.
 
 ## Scripts
 Following are the details of scripts and supporting files for this project:
 - diabetes_dataset_cleaning_merged.ipynb - Final Jupyter Notebook file used for data cleaning and exploratory data analysis.
 - dataviz_fp_gp4_core.py - Core Python file to perform end to end process of data cleaning, connecting to database and ML algorithm.
-- db_params.py - This file contains the database_port and csv_path. Please edit this file before executing 'dataviz_fp_gp4_core.py'.
-- config.py - This is a local file which should contain the db_password to access the local pgadmin.
+- db_params.py - This file contains the host name, database name, username, password, database port and csv file path. Please edit this file to include the database port and CSV file path before executing 'dataviz_fp_gp4_core.py'.
 
 
 ## Data Visualization
