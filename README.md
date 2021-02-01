@@ -216,9 +216,11 @@ Following are the details of scripts and supporting files for this project:
 
 ## Data Visualization
 - The presentation can be found in in the link below:
+
 https://docs.google.com/presentation/d/1t7hnqTvwdebYlNXzeW0B_2L0q2JRRkGE5SaYeAwlZSw/edit?usp=sharing
 
 - Tableau dashboard can be found at the link below:
+
 https://public.tableau.com/profile/andrew.sanchez8518#!/vizhome/Diabetes_Project/DiabetesProject
 
 - Following is a snapshot of our final storyboard:
