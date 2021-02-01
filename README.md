@@ -47,7 +47,7 @@ The purpose of this project is to deterine if a model could be created that woul
 ![](analysis/eda_img/readmitted.png)
 
 ## Machine Learning Model
-Since this is a classification problem, we started with Logistic Regression model to predict the binary outcome of whether the patient will be re-admitted within 30 days or not.
+We started with Logistic Regression model to predict the binary outcome of whether the patient will be re-admitted within 30 days or not.
 We applied a tree model and a random forrest model as well after several adjustments to the logistic regression model. 
 
 ### Data Pre-Processing
@@ -65,13 +65,9 @@ The Initial dataset was created in two steps (prior to download):
     - Payer code – excluded from dataset
     - Medical specialty – included in dataset
 
-
-Pre-processing involves the following steps:
-
-
 ### Preliminary Feature Engineering
 
-- several variables modified using one hot encoding and dummy coding
+- Several variables modified using one hot encoding and dummy coding
 - Data was resampled to address imbalance in early readmissions
 - Data was scaled to improve model performance 
 - Feature importance was run with  RandomForestClassifier that ranks the features by their importance:
