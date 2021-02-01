@@ -13,6 +13,7 @@ import numpy as np
 import collections
 import researchpy as rp
 import scipy as sp
+import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
 import re
 import os
@@ -22,29 +23,28 @@ import matplotlib.pyplot as plt
 ## This code implements the DataBase logic                                                   ##
 ##                                                                                           ##
 ############################################################################################### 
+# Database - RDS on AWS and postgreSQL engine
 
-# Database Dependancies
 import sqlalchemy
 from sqlalchemy import create_engine
 import psycopg2
-from config import db_password
-from db_params import database_port, csv_path
 
-# Database Credentials
-DB_HOST = "127.0.0.1"
-DB_PORT = database_port
-DB_NAME = "DiabeticDB"
-DB_USER = "postgres"
-DB_PASS = db_password
-CSV_FILE_PATH = csv_path
+# Importing the database credentials from the db_params
+import db_params as creds
 
 
-print(">>>>>>>>>> Connecting to DiabeticDB database <<<<<<<<<<")
-conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=db_password, host=DB_HOST, port=DB_PORT)
-print("Database opened successfully")
+# Setting up a connection to the postgres server
+conn_string = "host="+ creds.DBHOST +" port="+ creds.DBPORT +" dbname="+ creds.DBNAME+ " user=" + creds.DBUSER +" password="+ creds.DBPASSWORD
 
-# Create a cursor
+# Connect to the AWS postgres database
+conn = psycopg2.connect(conn_string)
+print("Started Final Project Code...\n")
+print("Database Connected Successfully!\n")
+
+
+# Create a cursor object
 cur = conn.cursor()
+    
 # Drop the diabetes_raw_data if exists before creating one
 cur.execute("DROP TABLE IF EXISTS medicines_info");
 cur.execute("DROP TABLE IF EXISTS admission_info");
@@ -110,44 +110,58 @@ cur.execute('''CREATE TABLE diabetes_raw_data (
     PRIMARY KEY (encounter_id),
     UNIQUE (encounter_id));''')
 print("Table 'diabetes_raw_data' successfully created")
+conn.commit()
+
 
 # Copy the contents from the diabetic_data_initial.csv and write it to 'diabetes_raw_data' table
-cur = conn.cursor()
-cmd = f'''COPY diabetes_raw_data FROM '{CSV_FILE_PATH}' CSV HEADER DELIMITER ',';'''
-cur.execute(cmd)
+sql = "COPY diabetes_raw_data FROM STDIN DELIMITER ',' CSV HEADER"
+cur.copy_expert(sql, open(creds.CSV_FILE_PATH, "r"))
+
+
+# Create the connection to the PostgreSQL database
+db_string = f"postgres://{creds.DBUSER}:{creds.DBPASSWORD}@{creds.DBHOST}:{creds.DBPORT}/{creds.DBNAME}"
+engine = create_engine(db_string)
+conn.commit()
+
+
+
+# Read the raw data from the postgres into dataframe
+df = pd.read_sql_table("diabetes_raw_data", engine)
+print(df.head(5))
+
 
 ###############################################################################################
 ## This code implements the Data Cleaning Logic                                              ##
 ##                                                                                           ##
 ###############################################################################################
-
-# Create the connection to the PostgreSQL database
-db_string = f"postgres://{DB_USER}:{db_password}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
-engine = create_engine(db_string)
-conn.commit()
-
-# Read the raw data from the postgres into dataframe
-df = pd.read_sql_table("diabetes_raw_data", engine)
-print(df.head)
-
+print("Starting Data Cleaning...\n")
 pd.set_option('display.max_columns', None)
-print(df.head)
+print(df.head(5))
+
+
 
 # Show columns with missing greater than 20%
 for column in df:
     if df[df[column]=='?'].shape[0]/df.shape[0]*100 > 20:
         print(column,":",str(round(df[df[column]=='?'].shape[0]/df.shape[0]*100)) + "%")              
 
+
 # variables weight and payer_code were excluded due to quantity of missing data
 # medical specialty was recoded to add "missing" for the missing values.
+
+
 
 # drop weight and payer_code columns 
 df_copy = df.copy()
 df_copy.drop(columns=['weight', 'payer_code'], axis=1, inplace=True)
 
+
+
 # In order to keep observations independent, only one the first encounter is included
 # Dedupe based on first encounter
 df_deduped = df_copy.drop_duplicates(subset=['patient_nbr'], keep='first')
+
+
 
 # Remove encounters that resulted in either discharge to 
 # a hospice or patient death to avoid biasing analysis 
@@ -155,10 +169,14 @@ discharge_disposition_excluded=[11, 13, 14, 19, 20, 23]
 
 df_cleaned = df_deduped[~df_deduped.discharge_disposition_id.isin(discharge_disposition_excluded)]
 
+
+
 df_cleaned['gender'].value_counts()
+
 
 df_cleaned.drop(df_cleaned[(df_cleaned.loc[:,'gender'] == "Unknown/Invalid")].index, inplace = True)
 df_cleaned['gender'].value_counts()
+
 
 # recode readmitted to be binary 
 def recode_readmit(x):
@@ -171,14 +189,18 @@ df_cleaned['readmitted_recoded'] = df_cleaned['readmitted'].apply(recode_readmit
 # df_cleaned['readmitted_recoded'] = df_cleaned[df_cleaned.loc[:,'readmitted']].apply(recode_readmit)
 # df_cleaned['readmitted_recoded'] = df_cleaned.loc[:,['readmitted']].replace({'>30': 'NO'})
 
+
 # recode medical_specialty to add missing 
 df_cleaned['medical_specialty_recoded'] = df_cleaned.loc[:,['medical_specialty']].replace("?",'missing', inplace=False)
+
 
 # readmitted recoded is imbalanced with 91% of cases 
 # not having a 30 day readmission
 print(collections.Counter(df_cleaned['readmitted_recoded']))
 
+
 df_cleaned['medical_specialty_recoded'].value_counts()
+
 
 df_cleaned['medical_specialty_recoded'] = df_cleaned.loc[:,['medical_specialty_recoded']].replace({'Family/GeneralPractice': 'InternalMedicine'})
 
@@ -194,11 +216,27 @@ def values_to_other(col_name, value_unchanged):
 
 df_cleaned['medical_specialty_recoded'] = values_to_other(df_cleaned['medical_specialty_recoded'].values,"InternalMedicine")    
 
+
 df_cleaned['medical_specialty_recoded'].value_counts()
+
 
 # readmitted recoded is imbalanced with 91% of cases 
 # not having a 30 day readmission
 print(collections.Counter(df_cleaned['readmitted_recoded']))
+
+
+# Pie chart
+labels = ['NO readmissions', '< 30 days']
+sizes = df_cleaned.readmitted_recoded.value_counts()
+explode = (0, 0.1)  
+colors = ['lightblue','orange']
+fig1, ax1 = plt.subplots()
+ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+        shadow=True, startangle=90, colors=colors)
+ax1.axis('equal')  
+plt.tight_layout()
+plt.savefig('readmission_stats_pie_chart.png')
+
 
 # function to clean 'age' column
 def parse_age_range(age_col):
@@ -211,14 +249,19 @@ def parse_age_range(age_col):
 # replace 'age' values with cleaned values
 df_cleaned['age'] = parse_age_range(df_cleaned['age'].values)
 
+
 df_cleaned = df_cleaned.drop(columns=['readmitted', 'medical_specialty'])
 
+
 print(df_cleaned.columns)
+
 
 print(df_cleaned.dtypes)
 
 
-# # DB code goes here
+# # Database - Export cleaned data to new table
+
+
 # DB code to export cleaned dataset to DB
 # Create a cursor
 cur = conn.cursor()
@@ -226,8 +269,10 @@ cur = conn.cursor()
 cur.execute("DROP TABLE IF EXISTS diabetes_clean_data");
 conn.commit()
 
+
 # Write the cleaned data fro diabetes_clean_data_df into postgres diabetes_clean_data table 
-df_cleaned.to_sql(name='diabetes_clean_data', con=engine, if_exists='replace', index=False,
+# Note : This step will take some time.. breathe....
+df_cleaned.to_sql(name='diabetes_clean_data', con=engine, if_exists='replace', index=False, method='multi',
             dtype={'encounter_id': sqlalchemy.types.INTEGER(),
                    'patient_nbr' : sqlalchemy.types.INTEGER(),
                    'race' : sqlalchemy.types.VARCHAR(length=20),
@@ -246,9 +291,6 @@ df_cleaned.to_sql(name='diabetes_clean_data', con=engine, if_exists='replace', i
     'diag_1' :  sqlalchemy.types.VARCHAR(length=10),
     'diag_2' : sqlalchemy.types.VARCHAR(length=10),
     'diag_3' : sqlalchemy.types.VARCHAR(length=10),
-    'number_diagnoses' :  sqlalchemy.types.INTEGER(),
-    'max_glu_serum' :  sqlalchemy.types.VARCHAR(length=10),
-    'A1Cresult' :  sqlalchemy.types.VARCHAR(length=10),
     'metformin' :  sqlalchemy.types.VARCHAR(length=10),
     'repaglinide' :  sqlalchemy.types.VARCHAR(length=10),
     'nateglinide' :  sqlalchemy.types.VARCHAR(length=10),
@@ -277,6 +319,7 @@ df_cleaned.to_sql(name='diabetes_clean_data', con=engine, if_exists='replace', i
     'readmitted_recoded' :  sqlalchemy.types.VARCHAR(length=10),
     'medical_specialty_recoded' : sqlalchemy.types.VARCHAR(length=40)})
 print("Table 'diabetes_clean_data' successfully created")
+# Note : This step will take some time.. like 5-10 mins.. breatheeee... one more time....
 
 
 ###############################################################################################
@@ -286,25 +329,42 @@ print("Table 'diabetes_clean_data' successfully created")
 
 # Read the raw data from the postgres into dataframe
 df_cleaned = pd.read_sql_table("diabetes_clean_data", engine)
-print(df_cleaned.head)
+print(df_cleaned.head(5))
+
 
 # 69,710 records in the dataset 
 print(df_cleaned.describe())
 
+
 # 53.25% of admissions came from Trauma Center followed by ED
 print(rp.summary_cat(df_cleaned[['admission_source_id']]))
+
 
 # ~75% of cases were caucasian followed by 18% for African American 
 print(rp.summary_cat(df_cleaned[['race']]))
 
+
 # 53% cases were female, 47% male 
 print(rp.summary_cat(df_cleaned[['gender']]))
-df_cleaned.gender.value_counts().plot(kind='bar', title='gender')
-plt.show()
+labels = ['Female', 'Male']
+sizes = df_cleaned.gender.value_counts()
+explode = (0, 0.1)
+colors = ['pink','lightblue']
+fig1, ax1 = plt.subplots()
+ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+        shadow=True, startangle=90, colors=colors)
+ax1.axis('equal')  
+plt.tight_layout()
+plt.savefig("gender_distribution.png")
+
 
 #~81% of cases above age 50
-df_cleaned.age.value_counts().plot(kind='bar')
+# df_cleaned.age.value_counts().plot(kind='bar')
 print(rp.summary_cat(df_cleaned[['age']]))
+# sns.set_style('whitegrid')
+# sns.countplot(x='age', data=df_cleaned, palette='RdBu_r')
+# plt.savefig("age_distribution.png")
+
 
 # Average time in hospital 4.26 days 
 df_cleaned.agg(
@@ -322,10 +382,12 @@ df_cleaned.agg(
     }
 )
 
+
 # average time in hospital slightly longer (4.78 days) for those readmitted less than 30 days vs those not readmitted (4.21 days)
 df_cleaned.loc[:,['time_in_hospital', 'num_lab_procedures', 
                   'num_procedures', 'num_medications', 
                   'number_outpatient', 'number_emergency', 'number_inpatient', 'number_diagnoses']].groupby(df_cleaned['readmitted_recoded']).mean()
+
 
 
 fig, ax = plt.subplots()
@@ -333,23 +395,37 @@ fig, ax = plt.subplots()
 sum_cols = ['time_in_hospital', 'num_lab_procedures', 
                   'num_procedures', 'num_medications', 
                   'number_outpatient', 'number_emergency', 'number_inpatient', 'number_diagnoses']
-ax.boxplot(df_cleaned[sum_cols].values)
+# ax.boxplot(df_cleaned[sum_cols].values)
+# plt.xticks([1, 2, 3,4,5,6,7,8], sum_cols, rotation='vertical')
+# plt.show()
+# fig, ax = plt.subplots()
+
+sum_cols = ['time_in_hospital', 'num_lab_procedures', 
+                  'num_procedures', 'num_medications', 
+                  'number_outpatient', 'number_emergency', 'number_inpatient', 'number_diagnoses']
+box = plt.boxplot(df_cleaned[sum_cols].values, patch_artist=True)
 plt.xticks([1, 2, 3,4,5,6,7,8], sum_cols, rotation='vertical')
-plt.show()
+colors = ['blue', 'green', 'purple', 'tan', 'pink', 'red']
+for patch, color in zip(box['boxes'], colors):
+    patch.set_facecolor(color)
+plt.savefig("outliers_box_plot.png")
 
 print(df_cleaned.head(5))
 
-df_cleaned.time_in_hospital.hist()
+
+#df_cleaned.time_in_hospital.hist()
 
 
 ###############################################################################################
 ## This code implements the Data Pre-Processing for Machine Learning model                   ##
 ##                                                                                           ##
-###############################################################################################  
+############################################################################################### 
 
 encoded_df = df_cleaned.copy()
 
+
 print(df_cleaned.columns)
+
 
 # Show missing in dataset 
 for column in df_cleaned.columns:
@@ -357,16 +433,18 @@ for column in df_cleaned.columns:
     if missing_count>0:
         print(column,":",df_cleaned)
 
+
 df_cleaned.drop(df_cleaned[df_cleaned['num_lab_procedures'] > 95].index, inplace = True) 
 df_cleaned.drop(df_cleaned[df_cleaned['num_medications'] > 32].index, inplace = True) 
 df_cleaned.drop(df_cleaned[df_cleaned['number_diagnoses'] > 13].index, inplace = True)
 df_cleaned.drop(df_cleaned[df_cleaned['num_procedures'] > 5].index, inplace = True)
 
+
 # Create a list of columns to encode for each variable if variable type is object
 columns_to_encode = [column for column in df_cleaned.columns if df_cleaned[column].dtypes == 'O']
 
-print(columns_to_encode)
 
+print(columns_to_encode)
 
 # exclude diag 1, 2, and 3 from recode list 
 for i in range(3):
@@ -377,6 +455,7 @@ print("\n", len(columns_to_encode), "columns")
 
 encoded_df = df_cleaned.copy()
 
+
 # function to apply label encoding
 def apply_encoder(cols):
     le = LabelEncoder()
@@ -386,10 +465,14 @@ def apply_encoder(cols):
         encoded_df[new_column_name] = le.transform(encoded_df[c])
         print(c, ":", le.classes_)
 
+
 # Apply Encoding
 apply_encoder(columns_to_encode)
 
+
 print(encoded_df.columns)
+
+
 
 cols_to_drop = ['encounter_id', 'patient_nbr', 'race', 'gender', 'age', 'admission_type_id','max_glu_serum', 'a1cresult', 'metformin', 'repaglinide', 'nateglinide',
        'chlorpropamide', 'glimepiride', 'acetohexamide', 'glipizide', 'glyburide', 'tolbutamide', 'pioglitazone', 'rosiglitazone', 'acarbose',
@@ -403,22 +486,14 @@ encoded_df = encoded_df.drop(columns=cols_to_drop)
 ###############################################################################################
 ## This code implements the Machine Learning model                                           ##
 ##                                                                                           ##
-###############################################################################################  
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from imblearn.ensemble import BalancedRandomForestClassifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.svm import SVC
-from sklearn import tree
-# from imblearn.over_sampling import RandomOverSampler
-from imblearn.under_sampling import RandomUnderSampler
-from sklearn.metrics import balanced_accuracy_score, confusion_matrix, classification_report
-from imblearn.metrics import classification_report_imbalanced
-from sklearn.preprocessing import StandardScaler
-from collections import Counter
+###############################################################################################
+
 
 print(encoded_df.head(5))
 
+
+
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 y = encoded_df["readmitted_recoded_le"]
 X = encoded_df.drop(columns=['readmitted_recoded_le'])
@@ -444,7 +519,10 @@ def list_feature_imp(X_train_input, y_train_input):
 #     ax.text(0.15, y_values, x_values, fontsize=12)
     ax.invert_yaxis()
 
+
+
 list_feature_imp(X_train, y_train)
+
 
 
 X = X.drop(columns=['acetohexamide_le', 
@@ -471,6 +549,19 @@ X = X.drop(columns=['acetohexamide_le',
                             ])
 
 
+
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from imblearn.ensemble import BalancedRandomForestClassifier
+from sklearn.svm import SVC
+from sklearn import tree
+# from imblearn.over_sampling import RandomOverSampler
+from imblearn.under_sampling import RandomUnderSampler
+from sklearn.metrics import balanced_accuracy_score, confusion_matrix, classification_report
+from imblearn.metrics import classification_report_imbalanced
+from sklearn.preprocessing import StandardScaler
+from collections import Counter
 # Split training/test datasets
 X_train, X_test, y_train, y_test = train_test_split(X,y, random_state=1, stratify=y)
 
@@ -492,6 +583,8 @@ X_scaler = scaler.fit(X_resampled)
 # Scaling the data.
 X_train_scaled = X_scaler.transform(X_resampled)
 X_test_scaled = X_scaler.transform(X_test)
+
+
 
 from yellowbrick.classifier import ClassificationReport
 import matplotlib.gridspec as gridspec
@@ -525,12 +618,13 @@ def apply_ml_model(X_train_input, y_train_input, X_test_input, y_test_input):
         print(f"Accuracy Score : {acc_score}\n")
         print("Classification Report")
         print(classification_report_imbalanced(y_test_input, y_pred))
-        visualizer = ClassificationReport(model_select, classes=classes, support=True)
-        visualizer.fit(X_train_input, y_train_input)        # Fit the visualizer and the model
-        visualizer.score(X_test_input, y_test_input)        # Evaluate the model on the test data
-        visualizer.show()                       # Finalize and show the figure
+        # visualizer = ClassificationReport(model_select, classes=classes, support=True)
+        # visualizer.fit(X_train_input, y_train_input)        # Fit the visualizer and the model
+        # visualizer.score(X_test_input, y_test_input)        # Evaluate the model on the test data
+        # visualizer.savefig(f"ML_{model}_Result.png")                       # Finalize and show the figure
 
 
 apply_ml_model(X_train_scaled, y_resampled, X_test_scaled, y_test)
+
 
 
