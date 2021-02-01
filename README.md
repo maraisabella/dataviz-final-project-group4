@@ -25,7 +25,7 @@
 - In order to enhance our communication in the most effective manner, we will be communicating via Slack for project updates. We will also be conducting team Zoom meetings every day. With both of these methods being used for our project, they are both equally crucial because we will be notifying each other of changes made to code and coordinating with each other before changes are pushed, pulled, and merged on GitHub.
 
 ## Overview
-The purpose of this project is to deterine if a model could be created that would significantly predict early readmissions (defined as less than 30 days from discharge) using logistic regression. 
+The purpose of this project is to determine if a model could be created that would significantly predict early readmissions (defined as less than 30 days from discharge) using logistic regression. 
 
 ## Exploratory Data Analysis
 - The preliminary dataset contained 69,710 records
@@ -82,11 +82,11 @@ The Initial dataset was created in two steps (prior to download):
 ![](analysis/feature_importance.png) 
 
 ### Description of Data Splitting
-- Data were split using the sklearn model selection module to split the dataset into training and testing datasets. The training dataset comprised of 75% of the original dataset while the testing set contained 25% of the dataset. For data splitting we used the following code snippet:
+- Data were split using the sklearn model selection module to split the dataset into training and testing datasets. The training dataset comprised of 75% of the original dataset while the testing set contained 25% of the dataset. 
 
-![](analysis/Test_Train_Set_Percentage.png)
+![](analysis/ml_img/Test_Train_Set_Percentage.png)
 
-Our cleaned dataframe contains a total of 69710 rows. Doing simple math we can see that there is a 75-25 split between train set and test set respectively.
+Our cleaned dataframe contains a total of 69710 rows.
 
 The provisional machine learning model we have used is Logistic Regression to predict patient readmission based on the following features:
 
@@ -147,7 +147,7 @@ Both "recall" and "f1 score" for predicting "No" readmissions is 0 which means t
 
 #### Undersampled Data
 Counter output on target variable clearly reveals that our data is undersampled:
-![](analysis/undersampled.png)
+![](analysis/ml_img/undersampled.png)
 
 #### Explanation of Improvement in Sampling and Model
 Due to the imbalance in data we first tried RandomUnderSampling but it didn't improve the precision and recall significantly. Then we tried SMOTE and Edited Nearest Neighbors (ENN) or SMOTEENN. We tried different classifiers 'Logistic Regression','Random Forest Classifier','Decision Tree' and 'Balanced Random Fores Classifier' as shown below along with their respective confusion matrices, accuracy scores and classification reports:
@@ -212,6 +212,7 @@ Following are the details of scripts and supporting files for this project:
 - diabetes_dataset_cleaning_merged.ipynb - Final Jupyter Notebook file used for data cleaning and exploratory data analysis.
 - dataviz_fp_gp4_core.py - Core Python file to perform end to end process of data cleaning, connecting to database and ML algorithm.
 - db_params.py - This file contains the host name, database name, username, password, database port and csv file path. Please edit this file to include the database port and CSV file path before executing 'dataviz_fp_gp4_core.py'.
+- ml_improvement.ipynb - This Jupyter Notebook file contains our final code for machine learning improvement and few changes to plots that we included in our presentation. This is the code that was used to generate the final .py core file for this project.
 
 
 ## Data Visualization
