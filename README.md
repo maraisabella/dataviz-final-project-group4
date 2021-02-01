@@ -70,6 +70,7 @@ Pre-processing involves the following steps:
 
 
 ### Preliminary Feature Engineering
+
 - several variables modified using one hot encoding and dummy coding
 - Data was resampled to address imbalance in early readmissions
 - Data was scaled to improve model performance 
@@ -125,7 +126,7 @@ features = ['race',
 Our label or outcome is a prediction of whether a patient will be readmitted within 30 days or not so it is naturally a classification problem. 
 
 #### Benefits
-- Logistic Regression is our initial choice as it is a binary classifier that fits our data and easy to implement.
+Logistic Regression is our initial choice as it is a binary classifier that fits our data and easy to implement.
 
 #### Limitations
 While accuracy score seems to be impressive i.e. we are achieving 91% of accureacy score with this model:
@@ -160,7 +161,7 @@ Due to the imbalance in data we first tried RandomUnderSampling but it didn't im
 ![](analysis/ml_img/brfc_plot.png)
 
 #### Model Selected
-We can see from the above scores that Random Forest Classifier reasonably fits the model as f1 score, recall and precision have significantly improved to predict <30 day re-admmission cases. 
+We can see from the above scores that Random Forest Classifier reasonably fits the model as f1 score, recall and precision have significantly improved for the prediction of  <30 day re-admmission cases. 
 
 ## Database Integration
 
