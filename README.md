@@ -201,12 +201,12 @@ Following are the details of scripts and supporting files for this project:
 https://docs.google.com/presentation/d/1t7hnqTvwdebYlNXzeW0B_2L0q2JRRkGE5SaYeAwlZSw/edit?usp=sharing
 
 - Tableau is used as primary tool for data visualization and dashboard creation. The story board for our project can be found at the following link:
-https://public.tableau.com/profile/muhammad.ovais.naeem#!/vizhome/Final_Project_Dashboard_16103489836810/Story1?publish=yes (In Progress)
+https://public.tableau.com/profile/andrew.sanchez8518#!/vizhome/Diabetes_Project/DiabetesProject
 - Various plots/stats were generated to analyze the impact on hospital re-admission 
 
-- Plots and visualizations are mainly static in Tableau, however filters will be provided to visualize the plots/stats based on parameters of interest.
+- Plots and visualizations are mainly static in Tableau, however filters are provided to visualize the plots/stats based on parameters of interest.
 
-- Following is a blueprint of the storyboard that will be improved and have more content added to in the next project deliverables:
+- Following is a snapshot of our final storyboard:
 
 ![](analysis/dashboard.png)
 
