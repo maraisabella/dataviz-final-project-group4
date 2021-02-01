@@ -1,5 +1,5 @@
 # Data Visualization Final Project - Team 4
-- Final project for the McCombs Data and Visualization Bootcamp
+## Final project for the McCombs Data and Visualization Bootcamp
 
 ## Project
 ### Topic: Prediction of early readmission for hospitalized patients with diabetes using data collected from electronic medical records.
@@ -31,19 +31,26 @@ The purpose of this project is to deterine if a model could be created that woul
 - The preliminary dataset contained 69,710 records
 - 63.57% of patients discharged were discharged to home
     - The next highest discharge disposition category was discharged/transferred to SNF at a distant 12.6%
+
 ![](analysis/eda_img/discharge_disp.png)
 - 53.25% of admissions came from Trauma Center followed by emergency department
+
 ![](analysis/eda_img/admission_source.png)
 - Roughly ~75% of cases were caucasian followed by 18% for African American
+
 ![](analysis/eda_img/race.png)
 - 53% cases were female, 47% male 
+
 ![](analysis/eda_img/gender.png)
 - ~81% of cases above age 50
+
 ![](analysis/eda_img/age.png)
 - average time in hospital slightly longer (4.78 days) for those readmitted less than 30 days vs those not readmitted (4.21 days)
+
 ![](analysis/eda_img/time_in_hosp.png)
 
 - 91% of cases did not have a readmission within 30 days resuting in a significantly unbalanced dataset
+
 ![](analysis/eda_img/readmitted.png)
 
 ## Machine Learning Model
@@ -194,14 +201,11 @@ Following are the details of scripts and supporting files for this project:
 
 
 ## Data Visualization
-- The dashboard will be demonstrated using Google slides. The following link directs to the presentation:
+- The presentation can be found in in the link below:
 https://docs.google.com/presentation/d/1t7hnqTvwdebYlNXzeW0B_2L0q2JRRkGE5SaYeAwlZSw/edit?usp=sharing
 
-- Tableau is used as primary tool for data visualization and dashboard creation. The story board for our project can be found at the following link:
+- Tableau dashboard can be found at the link below:
 https://public.tableau.com/profile/andrew.sanchez8518#!/vizhome/Diabetes_Project/DiabetesProject
-- Various plots/stats were generated to analyze the impact on hospital re-admission 
-
-- Plots and visualizations are mainly static in Tableau, however filters are provided to visualize the plots/stats based on parameters of interest.
 
 - Following is a snapshot of our final storyboard:
 
