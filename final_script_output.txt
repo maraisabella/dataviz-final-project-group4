@@ -1,0 +1,792 @@
+>>>>>>>>>> Connecting to DiabeticDB database <<<<<<<<<<
+Database opened successfully
+Table 'diabetes_raw_data' successfully created
+<bound method NDFrame.head of         encounter_id  patient_nbr  ... diabetesmed readmitted
+0            2278392      8222157  ...          No         NO
+1             149190     55629189  ...         Yes        >30
+2              64410     86047875  ...         Yes         NO
+3             500364     82442376  ...         Yes         NO
+4              16680     42519267  ...         Yes         NO
+...              ...          ...  ...         ...        ...
+101761     443847548    100162476  ...         Yes        >30
+101762     443847782     74694222  ...         Yes         NO
+101763     443854148     41088789  ...         Yes         NO
+101764     443857166     31693671  ...         Yes         NO
+101765     443867222    175429310  ...          No         NO
+
+[101766 rows x 50 columns]>
+<bound method NDFrame.head of         encounter_id  patient_nbr             race  gender      age weight  \
+0            2278392      8222157        Caucasian  Female   [0-10)      ?   
+1             149190     55629189        Caucasian  Female  [10-20)      ?   
+2              64410     86047875  AfricanAmerican  Female  [20-30)      ?   
+3             500364     82442376        Caucasian    Male  [30-40)      ?   
+4              16680     42519267        Caucasian    Male  [40-50)      ?   
+...              ...          ...              ...     ...      ...    ...   
+101761     443847548    100162476  AfricanAmerican    Male  [70-80)      ?   
+101762     443847782     74694222  AfricanAmerican  Female  [80-90)      ?   
+101763     443854148     41088789        Caucasian    Male  [70-80)      ?   
+101764     443857166     31693671        Caucasian  Female  [80-90)      ?   
+101765     443867222    175429310        Caucasian    Male  [70-80)      ?   
+
+        admission_type_id  discharge_disposition_id  admission_source_id  \
+0                       6                        25                    1   
+1                       1                         1                    7   
+2                       1                         1                    7   
+3                       1                         1                    7   
+4                       1                         1                    7   
+...                   ...                       ...                  ...   
+101761                  1                         3                    7   
+101762                  1                         4                    5   
+101763                  1                         1                    7   
+101764                  2                         3                    7   
+101765                  1                         1                    7   
+
+        time_in_hospital payer_code         medical_specialty  \
+0                      1          ?  Pediatrics-Endocrinology   
+1                      3          ?                         ?   
+2                      2          ?                         ?   
+3                      2          ?                         ?   
+4                      1          ?                         ?   
+...                  ...        ...                       ...   
+101761                 3         MC                         ?   
+101762                 5         MC                         ?   
+101763                 1         MC                         ?   
+101764                10         MC           Surgery-General   
+101765                 6          ?                         ?   
+
+        num_lab_procedures  num_procedures  num_medications  \
+0                       41               0                1   
+1                       59               0               18   
+2                       11               5               13   
+3                       44               1               16   
+4                       51               0                8   
+...                    ...             ...              ...   
+101761                  51               0               16   
+101762                  33               3               18   
+101763                  53               0                9   
+101764                  45               2               21   
+101765                  13               3                3   
+
+        number_outpatient  number_emergency  number_inpatient  diag_1  diag_2  \
+0                       0                 0                 0  250.83       ?   
+1                       0                 0                 0     276  250.01   
+2                       2                 0                 1     648     250   
+3                       0                 0                 0       8  250.43   
+4                       0                 0                 0     197     157   
+...                   ...               ...               ...     ...     ...   
+101761                  0                 0                 0  250.13     291   
+101762                  0                 0                 1     560     276   
+101763                  1                 0                 0      38     590   
+101764                  0                 0                 1     996     285   
+101765                  0                 0                 0     530     530   
+
+       diag_3  number_diagnoses max_glu_serum a1cresult metformin repaglinide  \
+0           ?                 1          None      None        No          No   
+1         255                 9          None      None        No          No   
+2         V27                 6          None      None        No          No   
+3         403                 7          None      None        No          No   
+4         250                 5          None      None        No          No   
+...       ...               ...           ...       ...       ...         ...   
+101761    458                 9          None        >8    Steady          No   
+101762    787                 9          None      None        No          No   
+101763    296                13          None      None    Steady          No   
+101764    998                 9          None      None        No          No   
+101765    787                 9          None      None        No          No   
+
+       nateglinide chlorpropamide glimepiride acetohexamide glipizide  \
+0               No             No          No            No        No   
+1               No             No          No            No        No   
+2               No             No          No            No    Steady   
+3               No             No          No            No        No   
+4               No             No          No            No    Steady   
+...            ...            ...         ...           ...       ...   
+101761          No             No          No            No        No   
+101762          No             No          No            No        No   
+101763          No             No          No            No        No   
+101764          No             No          No            No    Steady   
+101765          No             No          No            No        No   
+
+       glyburide tolbutamide pioglitazone rosiglitazone acarbose miglitol  \
+0             No          No           No            No       No       No   
+1             No          No           No            No       No       No   
+2             No          No           No            No       No       No   
+3             No          No           No            No       No       No   
+4             No          No           No            No       No       No   
+...          ...         ...          ...           ...      ...      ...   
+101761        No          No           No            No       No       No   
+101762        No          No           No            No       No       No   
+101763        No          No           No            No       No       No   
+101764        No          No       Steady            No       No       No   
+101765        No          No           No            No       No       No   
+
+       troglitazone tolazamide examide citoglipton insulin  \
+0                No         No      No          No      No   
+1                No         No      No          No      Up   
+2                No         No      No          No      No   
+3                No         No      No          No      Up   
+4                No         No      No          No  Steady   
+...             ...        ...     ...         ...     ...   
+101761           No         No      No          No    Down   
+101762           No         No      No          No  Steady   
+101763           No         No      No          No    Down   
+101764           No         No      No          No      Up   
+101765           No         No      No          No      No   
+
+       glyburide-metformin glipizide-metformin glimepiride-pioglitazone  \
+0                       No                  No                       No   
+1                       No                  No                       No   
+2                       No                  No                       No   
+3                       No                  No                       No   
+4                       No                  No                       No   
+...                    ...                 ...                      ...   
+101761                  No                  No                       No   
+101762                  No                  No                       No   
+101763                  No                  No                       No   
+101764                  No                  No                       No   
+101765                  No                  No                       No   
+
+       metformin-rosiglitazone metformin-pioglitazone change diabetesmed  \
+0                           No                     No     No          No   
+1                           No                     No     Ch         Yes   
+2                           No                     No     No         Yes   
+3                           No                     No     Ch         Yes   
+4                           No                     No     Ch         Yes   
+...                        ...                    ...    ...         ...   
+101761                      No                     No     Ch         Yes   
+101762                      No                     No     No         Yes   
+101763                      No                     No     Ch         Yes   
+101764                      No                     No     Ch         Yes   
+101765                      No                     No     No          No   
+
+       readmitted  
+0              NO  
+1             >30  
+2              NO  
+3              NO  
+4              NO  
+...           ...  
+101761        >30  
+101762         NO  
+101763         NO  
+101764         NO  
+101765         NO  
+
+[101766 rows x 50 columns]>
+weight : 97%
+payer_code : 40%
+medical_specialty : 49%
+Counter({0: 63441, 1: 6269})
+Counter({0: 63441, 1: 6269})
+Index(['encounter_id', 'patient_nbr', 'race', 'gender', 'age',
+       'admission_type_id', 'discharge_disposition_id', 'admission_source_id',
+       'time_in_hospital', 'num_lab_procedures', 'num_procedures',
+       'num_medications', 'number_outpatient', 'number_emergency',
+       'number_inpatient', 'diag_1', 'diag_2', 'diag_3', 'number_diagnoses',
+       'max_glu_serum', 'a1cresult', 'metformin', 'repaglinide', 'nateglinide',
+       'chlorpropamide', 'glimepiride', 'acetohexamide', 'glipizide',
+       'glyburide', 'tolbutamide', 'pioglitazone', 'rosiglitazone', 'acarbose',
+       'miglitol', 'troglitazone', 'tolazamide', 'examide', 'citoglipton',
+       'insulin', 'glyburide-metformin', 'glipizide-metformin',
+       'glimepiride-pioglitazone', 'metformin-rosiglitazone',
+       'metformin-pioglitazone', 'change', 'diabetesmed', 'readmitted_recoded',
+       'medical_specialty_recoded'],
+      dtype='object')
+encounter_id                  int64
+patient_nbr                   int64
+race                         object
+gender                       object
+age                          object
+admission_type_id             int64
+discharge_disposition_id      int64
+admission_source_id           int64
+time_in_hospital              int64
+num_lab_procedures            int64
+num_procedures                int64
+num_medications               int64
+number_outpatient             int64
+number_emergency              int64
+number_inpatient              int64
+diag_1                       object
+diag_2                       object
+diag_3                       object
+number_diagnoses              int64
+max_glu_serum                object
+a1cresult                    object
+metformin                    object
+repaglinide                  object
+nateglinide                  object
+chlorpropamide               object
+glimepiride                  object
+acetohexamide                object
+glipizide                    object
+glyburide                    object
+tolbutamide                  object
+pioglitazone                 object
+rosiglitazone                object
+acarbose                     object
+miglitol                     object
+troglitazone                 object
+tolazamide                   object
+examide                      object
+citoglipton                  object
+insulin                      object
+glyburide-metformin          object
+glipizide-metformin          object
+glimepiride-pioglitazone     object
+metformin-rosiglitazone      object
+metformin-pioglitazone       object
+change                       object
+diabetesmed                  object
+readmitted_recoded            int64
+medical_specialty_recoded    object
+dtype: object
+Table 'diabetes_clean_data' successfully created
+<bound method NDFrame.head of        encounter_id  patient_nbr             race  gender    age  \
+0           2278392      8222157        Caucasian  Female   0-10   
+1            149190     55629189        Caucasian  Female  10-20   
+2             64410     86047875  AfricanAmerican  Female  20-30   
+3            500364     82442376        Caucasian    Male  30-40   
+4             16680     42519267        Caucasian    Male  40-50   
+...             ...          ...              ...     ...    ...   
+69705     443842016    183087545        Caucasian  Female  70-80   
+69706     443842022    188574944            Other  Female  40-50   
+69707     443842070    140199494            Other  Female  60-70   
+69708     443842340    120975314        Caucasian  Female  80-90   
+69709     443867222    175429310        Caucasian    Male  70-80   
+
+       admission_type_id  discharge_disposition_id  admission_source_id  \
+0                      6                        25                    1   
+1                      1                         1                    7   
+2                      1                         1                    7   
+3                      1                         1                    7   
+4                      1                         1                    7   
+...                  ...                       ...                  ...   
+69705                  1                         1                    7   
+69706                  1                         1                    7   
+69707                  1                         1                    7   
+69708                  1                         1                    7   
+69709                  1                         1                    7   
+
+       time_in_hospital  num_lab_procedures  num_procedures  num_medications  \
+0                     1                  41               0                1   
+1                     3                  59               0               18   
+2                     2                  11               5               13   
+3                     2                  44               1               16   
+4                     1                  51               0                8   
+...                 ...                 ...             ...              ...   
+69705                 9                  50               2               33   
+69706                14                  73               6               26   
+69707                 2                  46               6               17   
+69708                 5                  76               1               22   
+69709                 6                  13               3                3   
+
+       number_outpatient  number_emergency  number_inpatient  diag_1  diag_2  \
+0                      0                 0                 0  250.83       ?   
+1                      0                 0                 0     276  250.01   
+2                      2                 0                 1     648     250   
+3                      0                 0                 0       8  250.43   
+4                      0                 0                 0     197     157   
+...                  ...               ...               ...     ...     ...   
+69705                  0                 0                 0     574     574   
+69706                  0                 1                 0     592     599   
+69707                  1                 1                 1     996     585   
+69708                  0                 1                 0     292       8   
+69709                  0                 0                 0     530     530   
+
+       diag_3  number_diagnoses max_glu_serum a1cresult metformin repaglinide  \
+0           ?                 1          None      None        No          No   
+1         255                 9          None      None        No          No   
+2         V27                 6          None      None        No          No   
+3         403                 7          None      None        No          No   
+4         250                 5          None      None        No          No   
+...       ...               ...           ...       ...       ...         ...   
+69705  250.02                 9          None        >7        No          No   
+69706     518                 9          None        >8        No          No   
+69707     403                 9          None      None        No          No   
+69708     304                 9          None      None        No          No   
+69709     787                 9          None      None        No          No   
+
+      nateglinide chlorpropamide glimepiride acetohexamide glipizide  \
+0              No             No          No            No        No   
+1              No             No          No            No        No   
+2              No             No          No            No    Steady   
+3              No             No          No            No        No   
+4              No             No          No            No    Steady   
+...           ...            ...         ...           ...       ...   
+69705          No             No          No            No        No   
+69706          No             No          No            No    Steady   
+69707          No             No          No            No        No   
+69708          No             No          No            No        No   
+69709          No             No          No            No        No   
+
+      glyburide tolbutamide pioglitazone rosiglitazone acarbose miglitol  \
+0            No          No           No            No       No       No   
+1            No          No           No            No       No       No   
+2            No          No           No            No       No       No   
+3            No          No           No            No       No       No   
+4            No          No           No            No       No       No   
+...         ...         ...          ...           ...      ...      ...   
+69705        Up          No           No            No       No       No   
+69706        No          No           No            No       No       No   
+69707        No          No           No            No       No       No   
+69708        No          No           No            No       No       No   
+69709        No          No           No            No       No       No   
+
+      troglitazone tolazamide examide citoglipton insulin glyburide-metformin  \
+0               No         No      No          No      No                  No   
+1               No         No      No          No      Up                  No   
+2               No         No      No          No      No                  No   
+3               No         No      No          No      Up                  No   
+4               No         No      No          No  Steady                  No   
+...            ...        ...     ...         ...     ...                 ...   
+69705           No         No      No          No  Steady                  No   
+69706           No         No      No          No      Up                  No   
+69707           No         No      No          No  Steady                  No   
+69708           No         No      No          No      Up                  No   
+69709           No         No      No          No      No                  No   
+
+      glipizide-metformin glimepiride-pioglitazone metformin-rosiglitazone  \
+0                      No                       No                      No   
+1                      No                       No                      No   
+2                      No                       No                      No   
+3                      No                       No                      No   
+4                      No                       No                      No   
+...                   ...                      ...                     ...   
+69705                  No                       No                      No   
+69706                  No                       No                      No   
+69707                  No                       No                      No   
+69708                  No                       No                      No   
+69709                  No                       No                      No   
+
+      metformin-pioglitazone change diabetesmed readmitted_recoded  \
+0                         No     No          No                  0   
+1                         No     Ch         Yes                  0   
+2                         No     No         Yes                  0   
+3                         No     Ch         Yes                  0   
+4                         No     Ch         Yes                  0   
+...                      ...    ...         ...                ...   
+69705                     No     Ch         Yes                  0   
+69706                     No     Ch         Yes                  0   
+69707                     No     No         Yes                  0   
+69708                     No     Ch         Yes                  0   
+69709                     No     No          No                  0   
+
+      medical_specialty_recoded  
+0                         Other  
+1                         Other  
+2                         Other  
+3                         Other  
+4                         Other  
+...                         ...  
+69705                     Other  
+69706                     Other  
+69707                     Other  
+69708                     Other  
+69709                     Other  
+
+[69710 rows x 48 columns]>
+       encounter_id   patient_nbr  admission_type_id  \
+count  6.971000e+04  6.971000e+04       69710.000000   
+mean   1.565601e+08  5.494146e+07           2.107761   
+std    1.004215e+08  3.949663e+07           1.509596   
+min    1.252200e+04  1.350000e+02           1.000000   
+25%    8.106699e+07  2.333357e+07           1.000000   
+50%    1.437268e+08  4.800196e+07           1.000000   
+75%    2.153859e+08  8.751431e+07           3.000000   
+max    4.438672e+08  1.895026e+08           8.000000   
+
+       discharge_disposition_id  admission_source_id  time_in_hospital  \
+count              69710.000000         69710.000000      69710.000000   
+mean                   3.339334             5.638244          4.261842   
+std                    5.049503             4.166790          2.925141   
+min                    1.000000             1.000000          1.000000   
+25%                    1.000000             1.000000          2.000000   
+50%                    1.000000             7.000000          3.000000   
+75%                    3.000000             7.000000          6.000000   
+max                   28.000000            25.000000         14.000000   
+
+       num_lab_procedures  num_procedures  num_medications  number_outpatient  \
+count        69710.000000    69710.000000     69710.000000       69710.000000   
+mean            42.859489        1.424258        15.634543           0.279501   
+std             19.904059        1.756553         8.254529           1.063143   
+min              1.000000        0.000000         1.000000           0.000000   
+25%             31.000000        0.000000        10.000000           0.000000   
+50%             44.000000        1.000000        14.000000           0.000000   
+75%             57.000000        2.000000        20.000000           0.000000   
+max            132.000000        6.000000        81.000000          42.000000   
+
+       number_emergency  number_inpatient  number_diagnoses  
+count      69710.000000      69710.000000      69710.000000  
+mean           0.103816          0.176359          7.220944  
+std            0.511998          0.602274          2.001574  
+min            0.000000          0.000000          1.000000  
+25%            0.000000          0.000000          6.000000  
+50%            0.000000          0.000000          8.000000  
+75%            0.000000          0.000000          9.000000  
+max           42.000000         12.000000         16.000000  
+               Variable  Outcome  Count  Percent
+0   admission_source_id        7  37122    53.25
+1                              1  21653    31.06
+2                             17   4808     6.90
+3                              4   2524     3.62
+4                              6   1783     2.56
+5                              2    902     1.29
+6                              5    506     0.73
+7                             20    153     0.22
+8                              3    136     0.20
+9                              9     95     0.14
+10                             8     11     0.02
+11                            10      7     0.01
+12                            22      4     0.01
+13                            14      2     0.00
+14                            25      2     0.00
+15                            11      1     0.00
+16                            13      1     0.00
+  Variable          Outcome  Count  Percent
+0     race        Caucasian  52117    74.76
+1           AfricanAmerican  12550    18.00
+2                         ?   1912     2.74
+3                  Hispanic   1499     2.15
+4                     Other   1144     1.64
+5                     Asian    488     0.70
+  Variable Outcome  Count  Percent
+0   gender  Female  37084     53.2
+1             Male  32626     46.8
+  Variable Outcome  Count  Percent
+0      age   70-80  17673    25.35
+1            60-70  15621    22.41
+2            50-60  12320    17.67
+3            80-90  11046    15.85
+4            40-50   6809     9.77
+5            30-40   2692     3.86
+6           90-100   1743     2.50
+7            20-30   1119     1.61
+8            10-20    534     0.77
+9             0-10    153     0.22
+   encounter_id  patient_nbr             race  gender    age  \
+0       2278392      8222157        Caucasian  Female   0-10   
+1        149190     55629189        Caucasian  Female  10-20   
+2         64410     86047875  AfricanAmerican  Female  20-30   
+3        500364     82442376        Caucasian    Male  30-40   
+4         16680     42519267        Caucasian    Male  40-50   
+
+   admission_type_id  discharge_disposition_id  admission_source_id  \
+0                  6                        25                    1   
+1                  1                         1                    7   
+2                  1                         1                    7   
+3                  1                         1                    7   
+4                  1                         1                    7   
+
+   time_in_hospital  num_lab_procedures  num_procedures  num_medications  \
+0                 1                  41               0                1   
+1                 3                  59               0               18   
+2                 2                  11               5               13   
+3                 2                  44               1               16   
+4                 1                  51               0                8   
+
+   number_outpatient  number_emergency  number_inpatient  diag_1  diag_2  \
+0                  0                 0                 0  250.83       ?   
+1                  0                 0                 0     276  250.01   
+2                  2                 0                 1     648     250   
+3                  0                 0                 0       8  250.43   
+4                  0                 0                 0     197     157   
+
+  diag_3  number_diagnoses max_glu_serum a1cresult metformin repaglinide  \
+0      ?                 1          None      None        No          No   
+1    255                 9          None      None        No          No   
+2    V27                 6          None      None        No          No   
+3    403                 7          None      None        No          No   
+4    250                 5          None      None        No          No   
+
+  nateglinide chlorpropamide glimepiride acetohexamide glipizide glyburide  \
+0          No             No          No            No        No        No   
+1          No             No          No            No        No        No   
+2          No             No          No            No    Steady        No   
+3          No             No          No            No        No        No   
+4          No             No          No            No    Steady        No   
+
+  tolbutamide pioglitazone rosiglitazone acarbose miglitol troglitazone  \
+0          No           No            No       No       No           No   
+1          No           No            No       No       No           No   
+2          No           No            No       No       No           No   
+3          No           No            No       No       No           No   
+4          No           No            No       No       No           No   
+
+  tolazamide examide citoglipton insulin glyburide-metformin  \
+0         No      No          No      No                  No   
+1         No      No          No      Up                  No   
+2         No      No          No      No                  No   
+3         No      No          No      Up                  No   
+4         No      No          No  Steady                  No   
+
+  glipizide-metformin glimepiride-pioglitazone metformin-rosiglitazone  \
+0                  No                       No                      No   
+1                  No                       No                      No   
+2                  No                       No                      No   
+3                  No                       No                      No   
+4                  No                       No                      No   
+
+  metformin-pioglitazone change diabetesmed readmitted_recoded  \
+0                     No     No          No                  0   
+1                     No     Ch         Yes                  0   
+2                     No     No         Yes                  0   
+3                     No     Ch         Yes                  0   
+4                     No     Ch         Yes                  0   
+
+  medical_specialty_recoded  
+0                     Other  
+1                     Other  
+2                     Other  
+3                     Other  
+4                     Other  
+Index(['encounter_id', 'patient_nbr', 'race', 'gender', 'age',
+       'admission_type_id', 'discharge_disposition_id', 'admission_source_id',
+       'time_in_hospital', 'num_lab_procedures', 'num_procedures',
+       'num_medications', 'number_outpatient', 'number_emergency',
+       'number_inpatient', 'diag_1', 'diag_2', 'diag_3', 'number_diagnoses',
+       'max_glu_serum', 'a1cresult', 'metformin', 'repaglinide', 'nateglinide',
+       'chlorpropamide', 'glimepiride', 'acetohexamide', 'glipizide',
+       'glyburide', 'tolbutamide', 'pioglitazone', 'rosiglitazone', 'acarbose',
+       'miglitol', 'troglitazone', 'tolazamide', 'examide', 'citoglipton',
+       'insulin', 'glyburide-metformin', 'glipizide-metformin',
+       'glimepiride-pioglitazone', 'metformin-rosiglitazone',
+       'metformin-pioglitazone', 'change', 'diabetesmed', 'readmitted_recoded',
+       'medical_specialty_recoded'],
+      dtype='object')
+['race', 'gender', 'age', 'diag_1', 'diag_2', 'diag_3', 'max_glu_serum', 'a1cresult', 'metformin', 'repaglinide', 'nateglinide', 'chlorpropamide', 'glimepiride', 'acetohexamide', 'glipizide', 'glyburide', 'tolbutamide', 'pioglitazone', 'rosiglitazone', 'acarbose', 'miglitol', 'troglitazone', 'tolazamide', 'examide', 'citoglipton', 'insulin', 'glyburide-metformin', 'glipizide-metformin', 'glimepiride-pioglitazone', 'metformin-rosiglitazone', 'metformin-pioglitazone', 'change', 'diabetesmed', 'readmitted_recoded', 'medical_specialty_recoded']
+['race', 'gender', 'age', 'max_glu_serum', 'a1cresult', 'metformin', 'repaglinide', 'nateglinide', 'chlorpropamide', 'glimepiride', 'acetohexamide', 'glipizide', 'glyburide', 'tolbutamide', 'pioglitazone', 'rosiglitazone', 'acarbose', 'miglitol', 'troglitazone', 'tolazamide', 'examide', 'citoglipton', 'insulin', 'glyburide-metformin', 'glipizide-metformin', 'glimepiride-pioglitazone', 'metformin-rosiglitazone', 'metformin-pioglitazone', 'change', 'diabetesmed', 'readmitted_recoded', 'medical_specialty_recoded']
+
+ 32 columns
+race : ['?' 'AfricanAmerican' 'Asian' 'Caucasian' 'Hispanic' 'Other']
+gender : ['Female' 'Male']
+age : ['0-10' '10-20' '20-30' '30-40' '40-50' '50-60' '60-70' '70-80' '80-90'
+ '90-100']
+max_glu_serum : ['>200' '>300' 'None' 'Norm']
+a1cresult : ['>7' '>8' 'None' 'Norm']
+metformin : ['Down' 'No' 'Steady' 'Up']
+repaglinide : ['Down' 'No' 'Steady' 'Up']
+nateglinide : ['Down' 'No' 'Steady' 'Up']
+chlorpropamide : ['Down' 'No' 'Steady' 'Up']
+glimepiride : ['Down' 'No' 'Steady' 'Up']
+acetohexamide : ['No']
+glipizide : ['Down' 'No' 'Steady' 'Up']
+glyburide : ['Down' 'No' 'Steady' 'Up']
+tolbutamide : ['No' 'Steady']
+pioglitazone : ['Down' 'No' 'Steady' 'Up']
+rosiglitazone : ['Down' 'No' 'Steady' 'Up']
+acarbose : ['No' 'Steady' 'Up']
+miglitol : ['Down' 'No' 'Steady' 'Up']
+troglitazone : ['No' 'Steady']
+tolazamide : ['No' 'Steady']
+examide : ['No']
+citoglipton : ['No']
+insulin : ['Down' 'No' 'Steady' 'Up']
+glyburide-metformin : ['Down' 'No' 'Steady' 'Up']
+glipizide-metformin : ['No' 'Steady']
+glimepiride-pioglitazone : ['No']
+metformin-rosiglitazone : ['No' 'Steady']
+metformin-pioglitazone : ['No' 'Steady']
+change : ['Ch' 'No']
+diabetesmed : ['No' 'Yes']
+readmitted_recoded : ['0' '1']
+medical_specialty_recoded : ['InternalMedicine' 'Other']
+Index(['encounter_id', 'patient_nbr', 'race', 'gender', 'age',
+       'admission_type_id', 'discharge_disposition_id', 'admission_source_id',
+       'time_in_hospital', 'num_lab_procedures', 'num_procedures',
+       'num_medications', 'number_outpatient', 'number_emergency',
+       'number_inpatient', 'diag_1', 'diag_2', 'diag_3', 'number_diagnoses',
+       'max_glu_serum', 'a1cresult', 'metformin', 'repaglinide', 'nateglinide',
+       'chlorpropamide', 'glimepiride', 'acetohexamide', 'glipizide',
+       'glyburide', 'tolbutamide', 'pioglitazone', 'rosiglitazone', 'acarbose',
+       'miglitol', 'troglitazone', 'tolazamide', 'examide', 'citoglipton',
+       'insulin', 'glyburide-metformin', 'glipizide-metformin',
+       'glimepiride-pioglitazone', 'metformin-rosiglitazone',
+       'metformin-pioglitazone', 'change', 'diabetesmed', 'readmitted_recoded',
+       'medical_specialty_recoded', 'race_le', 'gender_le', 'age_le',
+       'max_glu_serum_le', 'a1cresult_le', 'metformin_le', 'repaglinide_le',
+       'nateglinide_le', 'chlorpropamide_le', 'glimepiride_le',
+       'acetohexamide_le', 'glipizide_le', 'glyburide_le', 'tolbutamide_le',
+       'pioglitazone_le', 'rosiglitazone_le', 'acarbose_le', 'miglitol_le',
+       'troglitazone_le', 'tolazamide_le', 'examide_le', 'citoglipton_le',
+       'insulin_le', 'glyburide-metformin_le', 'glipizide-metformin_le',
+       'glimepiride-pioglitazone_le', 'metformin-rosiglitazone_le',
+       'metformin-pioglitazone_le', 'change_le', 'diabetesmed_le',
+       'readmitted_recoded_le', 'medical_specialty_recoded_le'],
+      dtype='object')
+   discharge_disposition_id  admission_source_id  time_in_hospital  \
+0                        25                    1                 1   
+1                         1                    7                 3   
+2                         1                    7                 2   
+3                         1                    7                 2   
+4                         1                    7                 1   
+
+   num_lab_procedures  num_procedures  num_medications  number_outpatient  \
+0                  41               0                1                  0   
+1                  59               0               18                  0   
+2                  11               5               13                  2   
+3                  44               1               16                  0   
+4                  51               0                8                  0   
+
+   number_emergency  number_inpatient  number_diagnoses  race_le  gender_le  \
+0                 0                 0                 1        3          0   
+1                 0                 0                 9        3          0   
+2                 0                 1                 6        1          0   
+3                 0                 0                 7        3          1   
+4                 0                 0                 5        3          1   
+
+   age_le  max_glu_serum_le  a1cresult_le  metformin_le  repaglinide_le  \
+0       0                 2             2             1               1   
+1       1                 2             2             1               1   
+2       2                 2             2             1               1   
+3       3                 2             2             1               1   
+4       4                 2             2             1               1   
+
+   nateglinide_le  chlorpropamide_le  glimepiride_le  acetohexamide_le  \
+0               1                  1               1                 0   
+1               1                  1               1                 0   
+2               1                  1               1                 0   
+3               1                  1               1                 0   
+4               1                  1               1                 0   
+
+   glipizide_le  glyburide_le  tolbutamide_le  pioglitazone_le  \
+0             1             1               0                1   
+1             1             1               0                1   
+2             2             1               0                1   
+3             1             1               0                1   
+4             2             1               0                1   
+
+   rosiglitazone_le  acarbose_le  miglitol_le  troglitazone_le  tolazamide_le  \
+0                 1            0            1                0              0   
+1                 1            0            1                0              0   
+2                 1            0            1                0              0   
+3                 1            0            1                0              0   
+4                 1            0            1                0              0   
+
+   examide_le  citoglipton_le  insulin_le  glyburide-metformin_le  \
+0           0               0           1                       1   
+1           0               0           3                       1   
+2           0               0           1                       1   
+3           0               0           3                       1   
+4           0               0           2                       1   
+
+   glipizide-metformin_le  glimepiride-pioglitazone_le  \
+0                       0                            0   
+1                       0                            0   
+2                       0                            0   
+3                       0                            0   
+4                       0                            0   
+
+   metformin-rosiglitazone_le  metformin-pioglitazone_le  change_le  \
+0                           0                          0          1   
+1                           0                          0          0   
+2                           0                          0          1   
+3                           0                          0          0   
+4                           0                          0          0   
+
+   diabetesmed_le  readmitted_recoded_le  medical_specialty_recoded_le  
+0               0                      0                             1  
+1               1                      0                             1  
+2               1                      0                             1  
+3               1                      0                             1  
+4               1                      0                             1  
+(0.15173230496445558, 'num_lab_procedures')
+(0.12462357563196809, 'num_medications')
+(0.0851244764391682, 'time_in_hospital')
+(0.06848955133990889, 'age_le')
+(0.059436540323380624, 'number_diagnoses')
+(0.05832554918923859, 'num_procedures')
+(0.051498222911782666, 'discharge_disposition_id')
+(0.04179639499977377, 'admission_source_id')
+(0.03816169492514479, 'insulin_le')
+(0.03480130529233278, 'race_le')
+(0.028589318330713258, 'gender_le')
+(0.02789404716707005, 'number_inpatient')
+(0.02736938812608283, 'a1cresult_le')
+(0.026361191901298438, 'number_outpatient')
+(0.0200791230949556, 'metformin_le')
+(0.019837932125351204, 'medical_specialty_recoded_le')
+(0.018687912069092434, 'glipizide_le')
+(0.017575812289758255, 'change_le')
+(0.017330067444241013, 'number_emergency')
+(0.016845680154339182, 'glyburide_le')
+(0.012048097283455213, 'pioglitazone_le')
+(0.010920600732308704, 'rosiglitazone_le')
+(0.010789375811815216, 'glimepiride_le')
+(0.010777384625510242, 'max_glu_serum_le')
+(0.010085022519663476, 'diabetesmed_le')
+(0.00489894407081244, 'repaglinide_le')
+(0.002143252509862919, 'nateglinide_le')
+(0.0019938041870968684, 'glyburide-metformin_le')
+(0.0011404828686495834, 'acarbose_le')
+(0.0003028771625185702, 'chlorpropamide_le')
+(0.00019323995779808203, 'tolazamide_le')
+(0.00012053654481968684, 'miglitol_le')
+(1.7277591294519763e-05, 'tolbutamide_le')
+(3.901919080574249e-06, 'glipizide-metformin_le')
+(3.6287066297976817e-06, 'troglitazone_le')
+(1.2588888977534792e-06, 'metformin-pioglitazone_le')
+(2.2589973008328412e-07, 'metformin-rosiglitazone_le')
+(0.0, 'glimepiride-pioglitazone_le')
+(0.0, 'examide_le')
+(0.0, 'citoglipton_le')
+(0.0, 'acetohexamide_le')
+Model: LREG
+Confusion Matrix
+          Predicted 0  Predicted 1
+Actual 0         8280         6284
+Actual 1          753          682
+Accuracy Score : 0.5218932272502386
+
+Classification Report
+                   pre       rec       spe        f1       geo       iba       sup
+
+          0       0.92      0.57      0.48      0.70      0.52      0.27     14564
+          1       0.10      0.48      0.57      0.16      0.52      0.27      1435
+
+avg / total       0.84      0.56      0.48      0.65      0.52      0.27     15999
+
+Model: RFC
+Confusion Matrix
+          Predicted 0  Predicted 1
+Actual 0        13048         1516
+Actual 1           79         1356
+Accuracy Score : 0.9204277264258106
+
+Classification Report
+                   pre       rec       spe        f1       geo       iba       sup
+
+          0       0.99      0.90      0.94      0.94      0.92      0.84     14564
+          1       0.47      0.94      0.90      0.63      0.92      0.85      1435
+
+avg / total       0.95      0.90      0.94      0.91      0.92      0.84     15999
+
+Model: Tree
+Confusion Matrix
+          Predicted 0  Predicted 1
+Actual 0        12368         2196
+Actual 1           71         1364
+Accuracy Score : 0.8998699480462062
+
+Classification Report
+                   pre       rec       spe        f1       geo       iba       sup
+
+          0       0.99      0.85      0.95      0.92      0.90      0.80     14564
+          1       0.38      0.95      0.85      0.55      0.90      0.82      1435
+
+avg / total       0.94      0.86      0.94      0.88      0.90      0.80     15999
+
+Model: Balanced RFC
+Confusion Matrix
+          Predicted 0  Predicted 1
+Actual 0        13533         1031
+Actual 1          477          958
+Accuracy Score : 0.7984024136647377
+
+Classification Report
+                   pre       rec       spe        f1       geo       iba       sup
+
+          0       0.97      0.93      0.67      0.95      0.79      0.64     14564
+          1       0.48      0.67      0.93      0.56      0.79      0.60      1435
+
+avg / total       0.92      0.91      0.69      0.91      0.79      0.63     15999
+
