@@ -31,19 +31,26 @@ The purpose of this project is to deterine if a model could be created that woul
 - The preliminary dataset contained 69,710 records
 - 63.57% of patients discharged were discharged to home
     - The next highest discharge disposition category was discharged/transferred to SNF at a distant 12.6%
+
 ![](analysis/eda_img/discharge_disp.png)
 - 53.25% of admissions came from Trauma Center followed by emergency department
+
 ![](analysis/eda_img/admission_source.png)
 - Roughly ~75% of cases were caucasian followed by 18% for African American
+
 ![](analysis/eda_img/race.png)
 - 53% cases were female, 47% male 
+
 ![](analysis/eda_img/gender.png)
 - ~81% of cases above age 50
+
 ![](analysis/eda_img/age.png)
 - average time in hospital slightly longer (4.78 days) for those readmitted less than 30 days vs those not readmitted (4.21 days)
+
 ![](analysis/eda_img/time_in_hosp.png)
 
 - 91% of cases did not have a readmission within 30 days resuting in a significantly unbalanced dataset
+
 ![](analysis/eda_img/readmitted.png)
 
 ## Machine Learning Model
